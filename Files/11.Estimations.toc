@@ -1,0 +1,28 @@
+\contentsline {section}{\numberline {1}Statistical Inference: Estimation}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introduction to Statistical Inference}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Branches of Inference}{3}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Frequentist vs. Bayesian Statistics}{3}{subsubsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.2}Fundamental Concepts of Estimation}{4}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Estimator vs. Estimate}{4}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}The Sampling Distribution}{4}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Measuring Quality: Mean Squared Error (MSE)}{4}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}The Golden Rule: Bias-Variance Decomposition}{4}{subsubsection.1.2.4}%
+\contentsline {subsubsection}{\numberline {1.2.5}BLUE (Best Linear Unbiased Estimator)}{5}{subsubsection.1.2.5}%
+\contentsline {subsubsection}{\numberline {1.2.6}UMVUE (Uniformly Minimum Variance Unbiased Estimator)}{7}{subsubsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.3}Common Estimators}{7}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Sample Mean}{7}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Sample Proportion}{8}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}Sample Variance ($n$ vs $n-1$)}{8}{subsubsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.4}Asymptotic Properties of Estimators (Large Samples)}{9}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}The Law of Large Numbers (LLN)}{10}{subsubsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.5}Limit Theorems}{10}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}The Central Limit Theorem (CLT)}{10}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}De Moivre-Laplace Theorem (CLT for Proportions)}{10}{subsubsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.6}The Titans of Estimation: LSE vs. MLE}{12}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Least Squares Estimation (LSE)}{12}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Maximum Likelihood Estimation (MLE)}{12}{subsubsection.1.6.2}%
+\contentsline {subsubsection}{\numberline {1.6.3}Fisher Information}{12}{subsubsection.1.6.3}%
+\contentsline {subsection}{\numberline {1.7}Confidence Intervals}{12}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}The Z-Interval (Known Variance or Large Sample)}{13}{subsubsection.1.7.1}%
+\contentsline {subsubsection}{\numberline {1.7.2}The T-Interval (Unknown Variance \& Small Sample)}{13}{subsubsection.1.7.2}%
+\contentsline {subsubsection}{\numberline {1.7.3}Confidence Intervals for the Variance}{13}{subsubsection.1.7.3}%

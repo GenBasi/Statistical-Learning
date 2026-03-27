@@ -165,7 +165,7 @@
 
 
 \parindent 0px
-\title{\Huge Data Mining and Machine Learning}
+\title{\Huge Statistical Learning}
 \author{\Large Gennaro Basile}
 \date{\today}
 
@@ -538,7 +538,7 @@ A \textbf{Random Variable} ($X$) is just a function that translates a \textit{re
 \end{example}
 
          \begin{figure}[H] 
-        \centering\includegraphics[scale=0.2]{106.Discrete variable.jpeg}
+        \centering\includegraphics[scale=0.15]{106.Discrete variable.jpeg}
         \caption{Discrete Random variable}
         \captionsetup{font=footnotesize}
         \label{fig-Discrete Random variable}
@@ -575,13 +575,23 @@ Think of these as  \textit{patterns} that describe how data behaves in the real 
 \begin{defbox}{Uniform Distribution $U(k)$}
 \textbf{Scenario:} \textit{Everything is equally likely.}
 \begin{itemize}
-    \item \textbf{Example:} Rolling a fair die.
-    \item \textbf{Probability:} $P(X=x) = \frac{1}{k}$
-    \item \textbf{Mean:} The exact middle value.
+    \item \textbf{Example:} Rolling a fair die. k is the number of possible outcomes.
+    \item \textbf{Probability:} 
+    \begin{equation}P(X=x) = \frac{1}{k}\end{equation}
+   
+    \item \textbf{Mean:} The exact middle value. 
 \end{itemize}
 \end{defbox}
 
-\vs
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.13]{201.Discrete uniform distribution.jpeg}
+    \caption{Discrete uniform distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+
 \begin{defbox}{Bernoulli Distribution $B(1, \pi)$}
 \textbf{Scenario:} \textit{The Atom of Probability.} A single trial with only two outcomes: Success (1) or Failure (0).
 \begin{itemize}
@@ -592,7 +602,79 @@ Think of these as  \textit{patterns} that describe how data behaves in the real 
 \end{itemize}
 \end{defbox}
 
-\vs
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.18]{202.Bernoulli Distribution.jpeg}
+    \caption{Bernoulli Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+
+\paragraph*{Why is the mean of a Bernoulli variable equal to \(\pi\)?}
+A Bernoulli random variable \(X\) can take only two values:
+\[
+X =
+\begin{cases}
+1 & \text{if success occurs} \\
+0 & \text{if failure occurs}
+\end{cases}
+\]
+
+The parameter \(\pi\) is the probability of success, that is:
+\[
+P(X=1)=\pi, \qquad P(X=0)=1-\pi
+\]
+
+The mean of a random variable is its expected value, computed as a weighted average of its possible numerical values:
+\[
+E[X] = 1 \cdot P(X=1) + 0 \cdot P(X=0)
+\]
+
+Substituting the Bernoulli probabilities, we get:
+\[
+E[X] = 1 \cdot \pi + 0 \cdot (1-\pi) = \pi
+\]
+
+So, the mean is equal to \(\pi\) because the variable is coded as \(1\) for success and \(0\) for failure. In other words, the average value of a Bernoulli variable represents the proportion of successes over many repeated trials.
+
+\paragraph*{Why is the variance of a Bernoulli variable equal to \(\pi(1-\pi)\)?}
+A Bernoulli random variable \(X\) takes only two possible values:
+\[
+X =
+\begin{cases}
+1 & \text{with probability } \pi \\
+0 & \text{with probability } 1-\pi
+\end{cases}
+\]
+
+We already know that its mean is:
+\[
+E[X]=\pi
+\]
+
+To compute the variance, we use:
+\[
+\mathrm{Var}(X)=E[X^2]-(E[X])^2
+\]
+
+For a Bernoulli variable, \(X^2=X\), because:
+\[
+0^2=0, \qquad 1^2=1
+\]
+
+Therefore,
+\[
+E[X^2]=E[X]=\pi
+\]
+
+Substituting into the variance formula:
+\[
+\mathrm{Var}(X)=\pi-\pi^2=\pi(1-\pi)
+\]
+
+This result shows that the variance depends on how balanced success and failure are. It is small when \(\pi\) is close to 0 or 1, because the outcome is more predictable. It is maximum when \(\pi=0.5\), because success and failure are equally likely, giving the highest uncertainty.
+
+
+\vspace{0.25cm}
 \textbf{2. Counting Successes (The \textit{Binomial} Family)}
 
 These distributions answer the question: \textit{How many successes did I get?}
@@ -600,24 +682,76 @@ These distributions answer the question: \textit{How many successes did I get?}
 \vs
 
 \begin{defbox}{Binomial Distribution $B(n, \pi)$}
-\textbf{Scenario:} You repeat a Bernoulli trial $n$ times independently.
+\textbf{Scenario:} You repeat the same Bernoulli trial \(n\) times independently, and you count how many successes occur.
+
 \begin{itemize}
-    \item \textbf{Example:} 100 users visit your site ($n=100$), and each has a 5\% chance of buying ($\pi=0.05$). How many sales ($X$) do I get?
-    \item \textbf{Formula:} Uses the combination $\binom{n}{x}$.
-    \item \textbf{Mean:} $n\pi$ (Expected sales = $100 \times 0.05 = 5$).
+    \item \textbf{Example:} Suppose you perform \(12\) independent trials (\(n=12\)), and each trial has probability \(0.4\) of success (\(\pi=0.4\)). Let \(X\) be the number of successes. The graph shows the probability of obtaining exactly \(0,1,2,\dots,12\) successes.
+
+\vs
+
+    \item \textbf{Probability:}
+    \begin{equation}
+    P(X=x)=\binom{n}{x}\pi^x(1-\pi)^{n-x}, \qquad x=0,1,\dots,n
+    \end{equation}
+    \item \textbf{Mean:}
+    \begin{equation}
+    E[X]=n\pi=12 \cdot 0.4=4.8
+   \end{equation}
+    This explains why the distribution is centered around 5 successes.
 \end{itemize}
 \end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.23]{203.Binomial Distribution.jpeg}
+    \caption{Binomial Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+Each bar represents \(P(X=x)\), that is, the probability of getting exactly \(x\) successes. In this example, the tallest bars are around \(x=4\) and \(x=5\), meaning that getting about 4 or 5 successes is the most likely outcome.
 
 \vs
 
 \begin{defbox}{Hypergeometric Distribution $H(N, n, m)$}
-\textbf{Scenario:} Same as Binomial, but \textbf{Sampling Without Replacement}.
+\textbf{Scenario:} Similar to the Binomial case, but now the sampling is done \textbf{without replacement}, so the trials are dependent.
+
 \begin{itemize}
-    \item \textbf{Example:} You have a deck of 52 cards ($N$), with 4 Aces ($m$). You draw 5 cards ($n$). How many are Aces?
-    \item \textbf{Key Difference:} The trials are \textbf{dependent}. If you draw an Ace first, it's harder to draw another one.
-    \item \textbf{Usage:} Important for Quality Control (sampling from small batches).
+    \item \textbf{Example:} Suppose a population contains \(N=30\) items, of which \(m=10\) are classified as successes. You randomly draw \(n=8\) items without replacement. Let \(X\) be the number of successes in the sample.
+    \vs
+
+    \item \textbf{Key Difference from Binomial:} The trials are \textbf{dependent}, because the composition of the population changes after each draw. If one success is drawn early, there is one fewer success left in the population, so the probability changes at the next draw.
+    \vs
+
+\item \textbf{Probability:}
+    \begin{equation}
+P(X=x)=\frac{\binom{m}{x}\binom{N-m}{\,n-x\,}}{\binom{N}{n}}
+   \end{equation}
+where:
+\begin{itemize}
+    \item \(N\) = total number of items in the population.
+    \item \(m\) = number of success states in the population.
+    \item \(n\) = number of draws.
+    \item \(x\) = number of observed successes in the sample.
+\end{itemize}
+    \vs
+
+\item \textbf{Mean:}
+\[
+E[X]=n\frac{m}{N}
+\]
+This means that the expected number of successes in the sample is equal to the sample size multiplied by the proportion of successes in the population.
+
 \end{itemize}
 \end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.23]{204.Hypergeometric Distribution.jpeg}
+    \caption{Hypergeometric Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+Each bar represents \(P(X=x)\), the probability of obtaining exactly \(x\) successes in the sample. In this example, the highest probabilities are around \(x=2\) and \(x=3\), meaning that getting 2 or 3 successes is the most likely outcome.
+
+\textbf{Usage:} This model is useful when sampling from a finite population, especially in applications such as quality control, auditing, and card-drawing problems.
 
 \vspace{0.3cm}
 
@@ -625,37 +759,117 @@ These distributions answer the question: \textit{How many successes did I get?}
 
 These distributions answer the question: \textit{How long do I have to wait?}
 
-\begin{defbox}{Geometric Distribution $G(\pi)$}
-\textbf{Scenario:} How many trials until the \textbf{first} success?
+\begin{defbox}{Geometric Distribution \(G(\pi)\)}
+\textbf{Scenario:} The Geometric distribution models the number of trials needed until the \textbf{first success} occurs.
+
 \begin{itemize}
-    \item \textbf{Example:} How many job interviews until I get an offer? (assuming 20\% success rate).
-    \item \textbf{Mean:} $1/\pi$ (If success rate is 20\%, expect to wait 5 interviews).
-    \item \textbf{Property:} \textit{Memoryless}. If you failed 10 times, your probability on the 11th try is exactly the same.
+    \item \textbf{Example:} Suppose each trial has probability \(p=0.25\) of success, and let \(X\) be the trial on which the first success occurs. The graph shows the probability of getting the first success on trial \(1,2,3,\dots\).
+
+   
+    \item \textbf{Formula:}
+    \begin{equation}
+    P(X=x)=(1-p)^{x-1}p, \qquad x=1,2,3,\dots
+    \end{equation}
+
+    \item \textbf{Mean:}
+    \begin{equation}
+    E[X]=\frac{1}{p}
+  \end{equation}
+    For example, if \(p=0.25\), then
+    \[
+    E[X]=\frac{1}{0.25}=4
+    \]
+    so on average we expect the first success around the 4th trial.
+
+    \item \textbf{Property:} \textit{Memoryless}. If no success has occurred yet, the probability of success on the next trial is still \(p\), exactly the same as at the beginning.
 \end{itemize}
 \end{defbox}
 
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.23]{205.Geometric Distribution.jpeg}
+    \caption{Geometric Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+Each bar represents \(P(X=x)\), the probability that the first success occurs exactly on trial \(x\). The highest probability is at \(x=1\), and then the probabilities decrease as \(x\) increases. This means that early success is more likely, while having to wait many trials is possible but less likely.
+
+
 \vs
-\begin{defbox}{Negative Binomial $NB(k, \pi)$}
-\textbf{Scenario:} How many trials until the \textbf{$k$-th} success?
+\begin{defbox}{Negative Binomial \(NB(k,\pi)\)}
+\textbf{Scenario:} The Negative Binomial distribution models the number of trials needed until the \textbf{\(k\)-th success} occurs.
+
 \begin{itemize}
-    \item \textbf{Example:} How many cold calls to make 5 sales?
-    \item It is essentially the sum of $k$ independent Geometric variables.
+    \item \textbf{Example:} Suppose each trial has probability \(p=0.35\) of success, and let \(X\) be the trial on which the \(4\)-th success occurs. The graph shows the probability that the 4-th success happens on trial \(4,5,6,\dots\).
+
+   
+
+    \item \textbf{Formula:}
+    \begin{equation}
+    P(X=x)=\binom{x-1}{k-1}p^k(1-p)^{x-k}, \qquad x=k,k+1,k+2,\dots
+    \end{equation}
+
+    \item \textbf{Mean:}
+     \begin{equation}
+    E[X]=\frac{k}{p}
+    \end{equation}
+    For example, if \(k=4\) and \(p=0.35\), then
+    \[
+    E[X]=\frac{4}{0.35}\approx 11.43
+    \]
+    so on average we expect the 4-th success around the 11-th trial.
+
 \end{itemize}
 \end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.23]{206.negative binomial.jpeg}
+    \caption{Negative Binomial Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+Each bar represents \(P(X=x)\), the probability that the \(k\)-th success occurs exactly on trial \(x\). In this example, the highest probabilities are around \(x=9\) and \(x=10\), meaning that the 4-th success is most likely to occur around the 9-th or 10-th trial.
+
+\textbf{Connection with the Geometric distribution:} It can be seen as the sum of \(k\) independent Geometric waiting times, because we are waiting for the first success, then the second, and so on, until the \(k\)-th success.
 
 \vspace{0.3cm}
 \textbf{4. Rate of Events (Poisson)}
 
 \vs
-\begin{defbox}{Poisson Distribution $P(\lambda)$}
-\textbf{Scenario:} Modeling rare events over a fixed time or space.
+\begin{defbox}{Poisson Distribution \(P(\lambda)\)}
+\textbf{Scenario:} The Poisson distribution models the number of events occurring in a fixed interval of time or space, assuming that events happen independently and at an average rate \(\lambda\).
+
 \begin{itemize}
-    \item \textbf{Example:} Number of server crashes per month. Number of customers arriving per hour.
-    \item \textbf{Parameter $\lambda$:} The average rate of occurrence.
-    \item \textbf{Unique Property:} Mean = Variance = $\lambda$.
-    \item \textbf{Usage:} Crucial for queuing theory and reliability engineering.
+    \item \textbf{Example:} Suppose the average number of events is \(\lambda=4\) in a given interval, and let \(X\) be the number of events observed in that interval. The graph shows the probability of observing exactly \(0,1,2,\dots\) events.
+
+
+    \item \textbf{Formula:}
+    \begin{equation}
+    P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!}, \qquad x=0,1,2,\dots
+    \end{equation}
+
+    \item \textbf{Parameter \(\lambda\):} \(\lambda\) is the average number of events in the interval. It determines both the center and the spread of the distribution.
+
+    \item \textbf{Mean and Variance:}
+    \begin{equation}
+    E[X]=\lambda, \qquad \mathrm{Var}(X)=\lambda
+  \end{equation}
+    For example, if \(\lambda=4\), then the expected number of events is 4, and the variance is also 4.
+
+
 \end{itemize}
 \end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.25]{207.Poisson Distribution.jpeg}
+    \caption{Poisson Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+ Each bar represents \(P(X=x)\), the probability of observing exactly \(x\) events. In this example, the highest probabilities are around \(x=3\) and \(x=4\), meaning that observing 3 or 4 events is the most likely outcome.
+
+    \textbf{Usage:} This model is widely used for counting events such as arrivals, failures, calls, or accidents over a fixed interval.
 
 % IMMAGINE ORIGINALE MANTENUTA
 \begin{figure}[H] 
@@ -664,5 +878,701 @@ These distributions answer the question: \textit{How long do I have to wait?}
     \captionsetup{font=footnotesize}
     \label{fig-Discrete probabilty model tabel}
 \end{figure}
+
+\pagebreak
+
+\subsection{Continuous Random Variables and Probability Models}
+
+\subsubsection{Continuous Random Variables (PDF \& CDF)}
+In the continuous world, variables can take infinite possible decimal values. The probability of picking one \textit{exact} number is mathematically zero. Instead, we measure the probability of a value falling within a specific interval by calculating the \textbf{area under a curve}.
+
+\begin{itemize}
+    \item \textbf{Probability Density Function (PDF)  $f(x)$:} Represents the \textit{shape} of the distribution. It must always be positive, and the total area under the curve must equal 1 ($100\%$ probability). It tells you the height of the curve at the point $x$. 
+    \item \textbf{Cumulative Distribution Function (CDF)  $F(x)$:} Represents the \textit{running total} of probability. It is the area under the curve from $-\infty$ up to a specific point $x$.
+    \begin{equation}
+        F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t) \, dt
+    \end{equation}
+\end{itemize}
+
+\textbf{The Moments} \\
+The logic for mean and variance is identical to discrete variables, but we replace the summation symbol ($\sum$) with an integral ($\int$):
+\begin{itemize}
+    \item \textbf{Expected Value (Mean):} $E(X) = \int_{-\infty}^{+\infty} x f(x) \, dx = \mu$
+    \item \textbf{Variance:} $\text{Var}(X) = \int_{-\infty}^{+\infty} (x-\mu)^2 f(x) \, dx = \sigma^2$
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.15]{108.Continuous Random Variable.jpeg}
+    \caption{Continuous Random Variable}
+    \captionsetup{font=footnotesize}
+    \label{fig-Continuous Random Variable}
+\end{figure}
+
+This figure does not represent the CDF directly. It shows the probability over a finite interval, that is, the area under the density curve between \(x_0\) and \(x_1\). By contrast, the CDF at a point \(x\) is the total area under the curve from \(-\infty\) up to \(x\).
+
+\subsubsection{Key Continuous Probability Models}
+As a Data Scientist, you will encounter these foundational distributions repeatedly depending on the type of data you are modeling:
+
+\begin{defbox}{Uniform Distribution \(X \sim U_c(a,b)\)}
+\textbf{Scenario:} A continuous random variable is uniformly distributed over the interval \([a,b]\), meaning that all values inside the interval are equally likely in terms of density.
+
+\begin{itemize}
+ \item \textbf{Probability density function:}The density function is constant over \([a,b]\), so the graph is a horizontal line. Its height is
+   \item \textbf{Probability density function:}
+    \begin{equation}
+    f(x)=
+    \begin{cases}
+    \dfrac{1}{b-a}, & a \le x \le b \\[6pt]
+    0, & \text{otherwise}
+    \end{cases}
+\end{equation}
+
+    for \(a \le x \le b\), and \(f(x)=0\) outside the interval.
+
+
+\end{itemize}
+
+\end{defbox}
+
+   Since the density is flat, intervals of the same length inside \([a,b]\) have the same probability.
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.25]{137.Uniform distribution.jpeg}
+    \caption{Uniform distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+ The density forms a rectangle with base \(b-a\) and height \(\frac{1}{b-a}\), so the total area is
+    \[
+    (b-a)\cdot \frac{1}{b-a}=1
+    \]
+    as required for a probability density function.
+
+\begin{defbox}{ Exponential Distributions }
+
+
+
+  The Exponential distribution models the waiting time until the \textbf{next event} occurs. It is commonly used when events happen independently at a constant average rate.
+
+
+\begin{itemize}
+  
+
+    \item \textbf{Probability density function:}
+    \begin{equation}
+    f(x)=
+    \begin{cases}
+    \lambda e^{-\lambda x}, & x \geq 0 \\[4pt]
+    0, & x<0
+    \end{cases}
+\end{equation}
+
+    \item \textbf{Mean:}
+    \begin{equation}
+    E[X]=\frac{1}{\lambda}
+ \end{equation}
+
+    \item \textbf{Property:} The Exponential distribution is \textit{memoryless}. This means that if no event has occurred yet, the waiting time for the next event does not depend on how long we have already waited.
+    
+\end{itemize}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.2]{138.Esponential Distribution.jpeg}
+    \caption{Esponential Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+The density is highest near \(x=0\) and then decreases continuously as \(x\) increases. This means that short waiting times are more likely, while very long waiting times are possible but less likely.
+
+\begin{defbox}{Gamma Distributions $(\kappa,\lambda)$}
+
+The Gamma distribution is a generalization of the Exponential distribution. It models the waiting time until \(\kappa\) events occur.
+
+
+    \begin{itemize}
+ 
+
+    \item \textbf{Probability density function:}
+    \begin{equation}
+    f(x)=
+    \begin{cases}
+    \dfrac{\lambda^\kappa x^{\kappa-1}e^{-\lambda x}}{\Gamma(\kappa)}, & x \geq 0 \\[8pt]
+    0, & x<0
+    \end{cases}
+\end{equation}
+
+    \item \textbf{Mean:}
+  \begin{equation}
+    E[X]=\frac{\kappa}{\lambda}
+  \end{equation}
+
+\end{itemize}
+
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.2]{139.Gamma Distribution.jpeg}
+    \caption{Gamma Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+
+Unlike the Exponential case, the Gamma density may first increase, reach a peak, and then decrease. This reflects the fact that we are no longer waiting for just one event, but for the \(\kappa\)-th event.
+
+\textbf{Connection with the Exponential distribution:} The Exponential distribution is a special case of the Gamma distribution when \(\kappa=1\).
+
+
+\begin{defbox}{Beta Distribution \(X \sim \mathrm{Be}(\alpha,\beta)\)}
+The Beta distribution models a continuous random variable constrained to the interval \([0,1]\). It is very flexible and can take many different shapes depending on the values of \(\alpha\) and \(\beta\).
+
+\begin{itemize}
+
+
+    \item \textbf{Probability density function:}
+    \begin{equation}
+    f(x)=
+    \begin{cases}
+    \dfrac{1}{B(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}, & 0 \le x \le 1 \\[8pt]
+    0, & \text{otherwise}
+    \end{cases}
+\end{equation}
+    where \(B(\alpha,\beta)\) is the Beta function.
+
+    \item \textbf{Mean:}
+    \begin{equation}
+    E[X]=\frac{\alpha}{\alpha+\beta}
+  \end{equation}
+
+  \vs
+
+    \item \textbf{Why it is useful:} Since the Beta distribution is bounded between 0 and 1, it is especially useful for modeling probabilities, proportions, and rates.
+
+
+\end{itemize}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.2]{140.beta distribution.jpeg}
+    \caption{Beta Distribution}
+    \captionsetup{font=footnotesize}
+\end{figure}
+
+The density is defined only between 0 and 1. In this example, the curve is concentrated more toward smaller values of \(x\), meaning that values closer to 0 are more likely than values close to 1.
+
+ \textbf{Data Science Use Case:} It is widely used in Bayesian statistics to model uncertain probabilities, such as conversion rates, click-through rates, and success proportions.
+
+
+
+\subsubsection{The Normal (Gaussian) Distribution}
+\begin{defbox}{Normal Distribution \(N(\mu,\sigma^2)\)}
+The Normal distribution is one of the most important distributions in statistics, mainly because of the \textbf{Central Limit Theorem}. It is a continuous distribution with a characteristic bell-shaped curve, perfectly symmetric around its mean \(\mu\).
+
+\begin{itemize}
+    \item \textbf{Parameters:}
+    \[
+    \mu = \text{mean}, \qquad \sigma^2 = \text{variance}
+    \]
+    The parameter \(\mu\) determines the center of the distribution, while \(\sigma^2\) controls the spread. A larger \(\sigma\) produces a wider and flatter curve.
+
+    \vs
+    \item \textbf{Probability density function:}
+    \begin{equation}
+    f(x)=\frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right), \qquad x\in\mathbb{R}
+    \end{equation}
+
+
+
+
+\end{itemize}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.45]{110.Normal Distribution.jpeg}
+    \caption{Normal Distribution showing the empirical rule}
+    \captionsetup{font=footnotesize}
+    \label{fig-Normal Distribution}
+\end{figure}
+
+\textbf{Symmetry:} Since the curve is perfectly symmetric around \(\mu\), the mean, median, and mode all coincide:
+    \[
+    \text{mean}=\text{median}=\text{mode}=\mu
+    \]
+
+  \textbf{Empirical Rule (68--95--99.7):}
+    \begin{itemize}
+        \item Approximately \(68\%\) of the data falls within \(1\sigma\) of the mean.
+        \item Approximately \(95\%\) of the data falls within \(2\sigma\) of the mean.
+        \item Approximately \(99.7\%\) of the data falls within \(3\sigma\) of the mean.
+    \end{itemize}
+
+
+
+
+\vs
+
+\textbf{Standardization (Z-Score)} \\
+Because every dataset has a different mean and variance, calculating probabilities is difficult. We solve this by transforming any normal distribution into the \textbf{Standard Normal} $Z \sim N(0, 1)$.
+
+    \begin{equation}
+    Z=\frac{X-\mu}{\sigma} \sim N(0,1)
+    \end{equation}
+
+       \textbf{Why it is important:} In this way, we do not need a different table for every pair \((\mu,\sigma)\). We can always use the table of the standard normal distribution instead.
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.42]{111.Standardize Normal Distribution.jpeg}
+    \caption{Standardized Normal Distribution}
+    \captionsetup{font=footnotesize}
+    \label{fig-Standardize Normal Distribution}    
+\end{figure}
+
+
+\textit{Data Science Takeaway:} This exact mathematical operation is called \textit{Standardization.} In Machine Learning, you will constantly use functions like scikit-learn's \texttt{StandardScaler} to apply this formula to your features, ensuring neural networks train efficiently.
+
+\subsubsection{Sampling Distributions (Transformations of Normal)}
+In the real world, you never know the true population mean ($\mu$) or variance ($\sigma^2$). You only have a sample. When working with sample statistics, we must use \textit{adapted} versions of the Normal distribution.
+
+\begin{defbox}{1. Chi-Square Distribution \(\chi^2_g\)}
+\textbf{What it is:} A Chi-Square random variable is defined as the sum of the squares of \(g\) independent standard normal variables:
+\[
+X = Z_1^2 + Z_2^2 + \cdots + Z_g^2,
+\qquad \text{where } Z_i \sim N(0,1)
+\]
+Since each term is squared, the variable can only take non-negative values. For this reason, the Chi-Square distribution is defined on \([0,+\infty)\) and is typically right-skewed.
+
+\begin{itemize}
+    \item \textbf{Parameter \(g\):} \(g\) is called the number of \textit{degrees of freedom}.
+
+    \item \textbf{Mean:}
+    \[
+    E[X]=g
+    \]
+
+    \item \textbf{Variance:}
+    \[
+    \mathrm{Var}(X)=2g
+    \]
+
+    \item \textbf{Shape:} The distribution is always non-negative. For small \(g\), it is strongly right-skewed; as \(g\) increases, it becomes more symmetric.
+    \item \textbf{Important application:} In goodness-of-fit and independence tests, the Chi-Square statistic is often computed as
+    \[
+    \chi^2=\sum_{i=1}^{k}\frac{(O_i-E_i)^2}{E_i}
+    \]
+    where \(O_i\) are the observed frequencies and \(E_i\) are the expected frequencies.
+
+\end{itemize}
+\end{defbox}
+
+
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.4]{112.Chi-square and probability table.jpeg}
+    \caption{Chi-square distributions for different degrees of freedom and probability table}
+    \captionsetup{font=footnotesize}
+    \label{fig-Chi-square and probability table}
+\end{figure}
+
+
+The graph shows the density of a Chi-Square random variable. Since the Chi-Square distribution is based on squared quantities, it can only take non-negative values and is typically right-skewed.
+
+\begin{itemize}
+    \item \textbf{Interpretation of the graph:} The horizontal axis contains the possible values of the test statistic \(\chi^2\), while the vertical axis represents the density \(f(x)\). The shaded area to the right of a given value \(\chi^2\) represents the probability.   Which is the right-tail probability.
+    \[
+    P(X \geq \chi^2)
+    \]
+  
+\vs
+    \item \textbf{Interpretation of the table:} The Chi-Square table provides critical values for different degrees of freedom and right-tail probabilities. Each row corresponds to a number of degrees of freedom, and each column corresponds to a tail probability level.
+
+    \vs
+    \item \textbf{Example:} If the degrees of freedom are \(4\), the value \(9.49\) in the table corresponds to a right-tail probability of \(0.05\). This means:
+    \[
+    P(X \geq 9.49)=0.05 \qquad \text{for } X \sim \chi^2_4
+    \]
+    Therefore, if an observed test statistic is greater than \(9.49\), the p-value is smaller than \(0.05\), and this gives evidence against the null hypothesis.
+
+    \vs
+
+    \item \textbf{Typical use:} The Chi-Square distribution is commonly used in goodness-of-fit tests, tests of independence, and inference on population variance.
+\end{itemize}
+
+\begin{example}{Practical example of a Chi-Square Goodness-of-Fit test}
+Suppose we want to check whether a die is fair.
+
+\begin{itemize}
+    \item \textbf{Null hypothesis \(H_0\):} the die is fair, so each face has probability \(1/6\).
+    \item \textbf{Alternative hypothesis \(H_1\):} the die is not fair.
+\end{itemize}
+
+We roll the die \(60\) times and observe the following frequencies:
+
+\[
+O = (5,\,8,\,9,\,12,\,14,\,12)
+\]
+
+If the die is fair, the expected frequency for each face is:
+
+\[
+E_i=\frac{60}{6}=10
+\]
+
+So the expected frequencies are:
+
+\[
+E = (10,\,10,\,10,\,10,\,10,\,10)
+\]
+
+The Chi-Square test statistic is:
+
+\[
+\chi^2 = \sum_{i=1}^{6}\frac{(O_i-E_i)^2}{E_i}
+\]
+
+Substituting the values:
+
+\[
+\chi^2 =
+\frac{(5-10)^2}{10}+
+\frac{(8-10)^2}{10}+
+\frac{(9-10)^2}{10}+
+\frac{(12-10)^2}{10}+
+\frac{(14-10)^2}{10}+
+\frac{(12-10)^2}{10}
+\]
+
+\[
+\chi^2 =
+\frac{25}{10}+\frac{4}{10}+\frac{1}{10}+\frac{4}{10}+\frac{16}{10}+\frac{4}{10}
+= 2.5+0.4+0.1+0.4+1.6+0.4 = 5.4
+\]
+
+So the observed test statistic is:
+
+\[
+\chi^2_{\text{obs}}=5.4
+\]
+
+This value measures how far the observed frequencies are from the expected ones. A small value means that the observed data are close to what we would expect under \(H_0\), while a large value means that the difference is too large to be explained by random variation alone.
+
+\vs
+
+
+\textbf{Degrees of freedom in the Chi-Square example}
+In this die example, there are \(6\) categories, so the degrees of freedom are:
+
+\[
+g = 6-1 = 5
+\]
+
+\textbf{Why do we subtract 1?}
+
+Because once we know the frequencies of \(5\) categories, the last one is automatically determined by the fact that the total number of observations must be \(60\).
+
+For example, if we already know that the first five observed frequencies are:
+
+\[
+5,\;8,\;9,\;12,\;14
+\]
+
+their sum is:
+
+\[
+5+8+9+12+14=48
+\]
+
+Since the total must be \(60\), the last frequency cannot be chosen freely. It must be:
+
+\[
+60-48=12
+\]
+
+So only \(5\) frequencies are free to vary, and this is why the test has \(5\) degrees of freedom.
+
+\textbf{Interpretation:} Degrees of freedom represent the number of values that can vary independently once the constraint on the total is taken into account.
+
+\end{example}
+
+
+\vs
+
+
+\begin{defbox}{2. Student's t-Distribution (\(t_g\))}
+The Student's t-distribution is similar to the Normal distribution: it is bell-shaped, symmetric around 0, and defined on all real numbers. However, it has \textbf{heavier tails}, which means that more probability is placed far from the center. 
+
+\vs
+
+This reflects the extra uncertainty that appears when the population variance is unknown and must be estimated from the sample.
+
+\vs
+As the sample size increases, the t-distribution becomes closer and closer to the standard Normal distribution.
+
+\begin{itemize}
+
+    \item \textbf{Test statistic:} In the one-sample case, the t-distribution appears in the statistic
+    \begin{equation}
+    t=\frac{\bar{X}-\mu_0}{S/\sqrt{n}}
+    \end{equation}
+    where \(\bar{X}\) is the sample mean, \(\mu_0\) is the hypothesized population mean, \(S\) is the sample standard deviation, and \(n\) is the sample size.
+
+    \vs
+
+      \item  \textbf{When to use it:} The t-distribution is used when making inference about a population \textbf{mean}, especially when the sample size is small and the true population variance is unknown.
+
+   \vs
+   \item \textbf{Why the tails are heavier:} Since the population standard deviation is not known, we replace it with the sample standard deviation. This introduces additional variability, so the t-distribution gives more weight to extreme values than the Normal distribution.
+
+
+\end{itemize}
+\end{defbox}
+
+
+
+
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.38]{113.t-student and probability table.jpeg}
+    \caption{t-Student distributions compared to normal, and probability table}
+    \captionsetup{font=footnotesize}
+    \label{fig-t-student and probability table}
+\end{figure}
+
+   \textbf{Interpretation of the graph:} The curve is centered at \(0\), and the shaded right tail represents a probability of \(0.05\). For \(g=20\) degrees of freedom, the critical value is approximately
+    \[
+    t_{0.05,20} \approx 1.725
+    \]
+    meaning that
+    \[
+    P(T \geq 1.725)=0.05
+    \qquad \text{for } T \sim t_{20}
+    \]
+
+   \textbf{Interpretation of the table:} Each row corresponds to a number of degrees of freedom, and each column corresponds to a right-tail probability. In the row \(g=20\) and the column \(0.05\), the value \(1.725\) is the critical value that leaves \(5\%\) of the area in the right tail.
+
+
+   \textbf{Degrees of freedom:} The parameter \(g\) is the number of degrees of freedom. In the one-sample case,
+    \[
+    g=n-1
+    \]
+    because one degree of freedom is lost when estimating the sample mean.
+
+\vs
+
+\begin{example}{\textbf{Practical example of a one-sample t-test}}
+    
+Suppose we want to test whether the average battery life of a device is equal to 10 hours.
+
+\begin{itemize}
+    \item \textbf{Null hypothesis \(H_0\):}
+    \[
+    \mu = 10
+    \]
+
+    \item \textbf{Alternative hypothesis \(H_1\):}
+    \[
+    \mu \neq 10
+    \]
+
+    \item \textbf{Sample data:} Assume we collect a sample of \(n=21\) devices, and we compute:
+    \[
+    \bar{x}=10.8, \qquad s=2.1
+    \]
+
+    \item \textbf{Test statistic:}
+    \[
+    t=\frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+    \]
+
+    Substituting the values:
+    \[
+    t=\frac{10.8-10}{2.1/\sqrt{21}}
+    \approx \frac{0.8}{0.458}
+    \approx 1.75
+    \]
+
+    \item \textbf{Degrees of freedom:}
+    \[
+    g=n-1=21-1=20
+    \]
+
+    \item \textbf{Decision rule:} From the t-table, for \(g=20\) and right-tail probability \(0.05\), the critical value is about
+    \[
+    1.725
+    \]
+
+    Since the observed statistic is
+    \[
+    t_{\text{obs}} \approx 1.75 > 1.725
+    \]
+    it falls in the right-tail rejection region at the 5\% level for a one-sided test.
+
+    \item \textbf{Interpretation:} The sample mean is far enough from the hypothesized population mean that it is unlikely to be explained only by random sampling variation.
+\end{itemize}
+\end{example}
+
+\vspace{0.3cm}
+
+\begin{defbox}{3. F-Distribution \(F_{g,h}\): The Ratio of Two Variances}
+\textbf{What it is:} The F-distribution arises as the ratio of two independent Chi-Square variables, each divided by its own degrees of freedom:
+\begin{equation}
+F=\frac{U/g}{V/h}
+\qquad \text{with } U\sim \chi^2_g,\; V\sim \chi^2_h
+\end{equation}
+It is defined only for positive values and is typically right-skewed.
+
+\begin{itemize}
+ 
+
+    \item \textbf{Degrees of freedom:} The parameters \(g\) and \(h\) are the degrees of freedom of the numerator and denominator, respectively.
+
+    \item \textbf{When to use it:} The F-distribution is used when comparing two variances, or more generally when comparing explained variability to unexplained variability.
+
+    \item \textbf{Key interpretation:} If \(F\approx 1\), the two sources of variability are similar. If \(F\) is much larger than 1, the numerator variability is substantially larger than the denominator variability.
+
+    \item \textbf{Data Science Use Case:} The F-distribution is the theoretical basis of \textbf{ANOVA} and is also used in regression analysis to test whether a model explains a significant amount of variability.
+\end{itemize}
+\end{defbox}
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.45]{114. F-Snedecor-Fisher and Probability Table.jpeg}
+    \caption{F-Snedecor-Fisher distributions and probability table}
+    \captionsetup{font=footnotesize}
+    \label{fig-F-Snedecor-Fisher and Probability Table}
+\end{figure}
+
+ \textbf{Interpretation of the graph:} The horizontal axis contains the possible values of the statistic \(F\), while the vertical axis represents the density. The curve is not symmetric and has a long right tail. The shaded right-tail area represents the probability of observing a value at least as large as the chosen critical value.
+
+
+ \textbf{Interpretation of the table:} The F-table provides critical values for different pairs of degrees of freedom. One degree of freedom is associated with the numerator and the other with the denominator. In the example shown, the critical value is approximately
+    \[
+    F \approx 3.18
+    \]
+    for a specific pair of degrees of freedom and significance level. This means that values larger than \(3.18\) fall in the right-tail rejection region.
+
+    \begin{example}{\textbf{Practical example of the F-distribution: comparing two variances}}
+
+Suppose we want to compare the variability of two production processes.
+
+\begin{itemize}
+    \item \textbf{Goal:} Check whether the two populations have the same variance.
+
+    \item \textbf{Null hypothesis \(H_0\):}
+    \[
+    \sigma_1^2=\sigma_2^2
+    \]
+
+    \item \textbf{Alternative hypothesis \(H_1\):}
+    \[
+    \sigma_1^2 \neq \sigma_2^2
+    \]
+
+    \item \textbf{Sample data:} Assume we collect two independent samples:
+    \[
+    n_1=10, \qquad n_2=12
+    \]
+    with sample variances
+    \[
+    s_1^2=18, \qquad s_2^2=6
+    \]
+
+    \item \textbf{Test statistic:} We compute the ratio of the two sample variances:
+    \[
+    F=\frac{s_1^2}{s_2^2}=\frac{18}{6}=3
+    \]
+
+    \item \textbf{Degrees of freedom:}
+    \[
+    g=n_1-1=9, \qquad h=n_2-1=11
+    \]
+
+    \item \textbf{Interpretation:} If the two population variances are really equal, then the ratio of the sample variances should be close to 1. A value much larger than 1 suggests that the first population has greater variability than the second one.
+
+    \item \textbf{Decision idea:} We compare the observed value \(F=3\) with the critical value from the F-table for the chosen significance level and the pair of degrees of freedom \((9,11)\). If \(F\) falls in the right-tail rejection region, we reject \(H_0\).
+\end{itemize}
+\end{example}
+
+
+\pagebreak
+\subsection{Final Exam-Oriented Questions I Must Be Able to Answer}
+
+\begin{itemize}
+    \item What is the difference between descriptive statistics and inference?
+    \item What is the role of probability in inference?
+    \item What is the difference between PDF and CDF?
+    \item What is a random variable?
+    \item What do expected value and variance mean conceptually?
+    \item How do I decide whether a variable is discrete or continuous?
+    \item How do I choose the right probability distribution for a real-world problem?
+    \item How do I interpret the graph of a distribution?
+    \item What do the parameters of each distribution mean?
+    \item Why is the Normal distribution central in statistics?
+    \item Why do we standardize the Normal distribution?
+    \item What is the meaning of degrees of freedom?
+    \item When should I use Chi-Square, Student's t, and F?
+    \item How do I interpret a right-tail probability and a critical value?
+    \item What is the logical difference between estimation and hypothesis testing?
+\end{itemize}
+
+\subsubsection{Probability Model: Simple Summary with the Main Exam Questions Answered}
+
+The main idea of this chapter is that \textbf{probability helps us reason under uncertainty}. When we only describe the data we observe, we are doing \textbf{descriptive statistics}. When we use a sample to say something about the whole population, we are doing \textbf{statistical inference}. Inference includes both \textbf{estimation} and \textbf{hypothesis testing}.
+
+A \textbf{random variable} is a rule that assigns a numerical value to each outcome of an experiment. Once a random variable is defined, its \textbf{distribution} tells us which values it can take and how likely those values are. The \textbf{expected value} is the long-run average, while the \textbf{variance} measures how spread out the values are around the mean. For continuous variables, the same ideas hold, but sums are replaced by integrals.
+
+The role of probability in inference is to quantify uncertainty. Since a sample is only one part of the population, probability tells us how much trust we can place in an estimate or in the result of a test. This is why probability is the foundation of confidence intervals, p-values, and critical regions.
+
+For \textbf{continuous variables}, I must clearly distinguish between \textbf{PDF} and \textbf{CDF}. The \textbf{PDF} \(f(x)\) gives the \textbf{height of the curve} at the point \(x\), while the \textbf{CDF} \(F(x)\) gives the \textbf{accumulated probability} up to \(x\), that is,
+\[
+F(x)=P(X\le x)=\int_{-\infty}^{x} f(t)\,dt
+\]
+So the PDF describes the shape of the distribution, while the CDF gives an actual probability as area under the curve. 
+
+To decide whether a variable is \textbf{discrete} or \textbf{continuous}, I should ask whether it counts separate values or can take infinitely many decimal values. A variable is \textbf{discrete} when it counts things such as successes, customers, or defects. A variable is \textbf{continuous} when it measures quantities such as time, height, weight, or waiting time.
+
+To choose the right distribution, I should first ask what kind of question the problem is asking. 
+\begin{itemize}
+    \item If I have one success/failure trial, I think of \textbf{Bernoulli}. 
+    \item If I count successes in many independent trials, I think of \textbf{Binomial}. 
+    \item If I sample without replacement, I think of \textbf{Hypergeometric}. 
+    \item  If I wait for the first success, I think of \textbf{Geometric}. 
+    \item If I wait for the \(k\)-th success, I think of \textbf{Negative Binomial}. 
+    \item If I count events in a fixed interval, I think of \textbf{Poisson}. 
+\end{itemize}
+
+\vs
+\begin{itemize}
+
+    \item For continuous models, if I measure waiting time until the next event, I think of \textbf{Exponential};
+    \item  if I wait until the \(\kappa\)-th event, I think of \textbf{Gamma}; 
+    \item if I model a proportion between 0 and 1, I think of \textbf{Beta};
+    \item  if the variable is bell-shaped and symmetric, I think of \textbf{Normal}. 
+
+\end{itemize}
+
+To interpret the graph of a distribution, I should remember that in the discrete case each bar represents a probability such as \(P(X=x)\), while in the continuous case probabilities are areas under the curve. The graph tells me where the variable is concentrated, whether it is symmetric or skewed, and which values are more likely.
+
+The \textbf{parameters} of a distribution tell me how the model behaves. For example, in the Binomial distribution, \(n\) is the number of trials and \(\pi\) is the probability of success in each trial. In the Poisson distribution, \(\lambda\) is the average number of events in the interval, and it is both the mean and the variance. In the Normal distribution, \(\mu\) is the center and \(\sigma^2\) controls the spread. :contentReference[oaicite:4]{index=4}
+
+The \textbf{Normal distribution} is central in statistics because many natural phenomena are approximately normal, and because of the \textbf{Central Limit Theorem}. It is bell-shaped and symmetric, and many sample means become approximately normal when the sample size grows. We standardize a normal variable by using
+\[
+Z=\frac{X-\mu}{\sigma}
+\]
+so that every normal distribution can be transformed into the standard normal \(N(0,1)\). This makes probability calculations easier because we can use one common reference table instead of a different table for every \((\mu,\sigma)\). 
+
+\textbf{Degrees of freedom} tell us how many values are free to vary independently once a constraint has been imposed. For example, in a Chi-Square goodness-of-fit problem with 6 categories, the degrees of freedom are \(6-1=5\), because once the first 5 frequencies are known, the last one is fixed by the total. 
+
+I should use \textbf{Chi-Square} when I study variance, goodness-of-fit, or independence between categorical variables. I should use \textbf{Student's t} when I make inference on a population mean and the population variance is unknown, especially for small samples. I should use \textbf{F} when I compare two variances, or more generally when I compare explained variability to unexplained variability, as in ANOVA and regression. 
+
+A \textbf{right-tail probability} is the probability of obtaining a value at least as large as the observed test statistic. A \textbf{critical value} is the threshold that separates the usual region from the rejection region. For example, if the observed statistic is larger than the critical value, then it falls in the tail and gives evidence against the null hypothesis. This is how the probability tables for Chi-Square, t, and F are interpreted.
+
+Finally, I must know the logical difference between \textbf{estimation} and \textbf{hypothesis testing}. In estimation, I try to guess the value of an unknown parameter, for example the population mean or variance. In hypothesis testing, I start from a claim such as \(H_0\) and check whether the data are compatible with it. So estimation asks, ``What is the value of the parameter?'', while hypothesis testing asks, ``Is this claim about the parameter reasonable?''
+
+The most important takeaway is this: I should not study distributions as isolated formulas. I should study them as \textbf{tools that answer specific questions}. If I understand what kind of problem I have, then choosing the correct distribution or test becomes much easier.
+
 \end{document}
 

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.20)  26 MAR 2026 13:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.20)  26 MAR 2026 13:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/gennarobasile/Desktop/Data_Science_LM/1_YEAR/1_SEMESTER/Statistical-Learning/Files/9.Probability_Model
-(/Users/gennarobasile/Desktop/Data_Science_LM/1_YEAR/1_SEMESTER/Statistical-Learning/Files/9.Probability_Model.tex
+**"/Users/gennarobasile/Desktop/Data_Science_LM/1_YEAR/1_SEMESTER/Statistical-Learning/Files/10.Sampling Distributions"
+(/Users/gennarobasile/Desktop/Data_Science_LM/1_YEAR/1_SEMESTER/Statistical-Learning/Files/10.Sampling Distributions.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -847,8 +847,8 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 179.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) (./9.Probability_Model.aux)
-\openout1 = `9.Probability_Model.aux'.
+) (./10.Sampling Distributions.aux)
+\openout1 = `"10.Sampling Distributions.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 179.
 LaTeX Font Info:    ... okay on input line 179.
@@ -944,9 +944,9 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 179.
-(./9.Probability_Model.out) (./9.Probability_Model.out)
+(./10.Sampling Distributions.out) (./10.Sampling Distributions.out)
 \@outlinefile=\write5
-\openout5 = `9.Probability_Model.out'.
+\openout5 = `"10.Sampling Distributions.out"'.
 
 
 Package chemgreek Info: Activating mapping `default' on line 179.
@@ -981,7 +981,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 181.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<Images/0.png, id=155, 289.08pt x 216.81pt>
+<Images/0.png, id=67, 289.08pt x 216.81pt>
 File: Images/0.png Graphic file (type png)
 <use Images/0.png>
 Package pdftex.def Info: Images/0.png  used on input line 181.
@@ -990,238 +990,58 @@ Package pdftex.def Info: Images/0.png  used on input line 181.
 
 [1
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <./Images/0.png>] (./9.Probability_Model.toc
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc} <./Images/0.png>] (./10.Sampling Distributions.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 1.
 )
 \tf@toc=\write6
-\openout6 = `9.Probability_Model.toc'.
+\openout6 = `"10.Sampling Distributions.toc"'.
 
 
 
 [2]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 200.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 234.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
+
+[3{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+<Images/138.Central Limit Theorem.jpeg, id=101, 553.06625pt x 499.8675pt>
+File: Images/138.Central Limit Theorem.jpeg Graphic file (type jpg)
+<use Images/138.Central Limit Theorem.jpeg>
+Package pdftex.def Info: Images/138.Central Limit Theorem.jpeg  used on input line 258.
+(pdftex.def)             Requested size: 248.8775pt x 224.9383pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 238.
+(Font)              <10> on input line 259.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 238.
+(Font)              <7> on input line 259.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 238.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 240.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (4.35573pt too wide) in paragraph at lines 250--251
-[]\T1/lmr/m/n/10 Based on sam-ple var and size, they cal-cu-late a 95% Con-fi-dence In-ter-val for $\OML/lmm/m/it/10 ^^V$\T1/lmr/m/n/10 , say $\OT1/lmr/m/n/10 [34\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 36\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 4]$\T1/lmr/m/n/10 .
- []
+(Font)              <5> on input line 259.
 
 
+[4{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <./Images/138.Central Limit Theorem.jpeg>]
 
-[3{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
-
-[4]
-<Images/103.Venn Diagram.jpeg, id=223, 739.76375pt x 549.05125pt>
-File: Images/103.Venn Diagram.jpeg Graphic file (type jpg)
-<use Images/103.Venn Diagram.jpeg>
-Package pdftex.def Info: Images/103.Venn Diagram.jpeg  used on input line 328.
-(pdftex.def)             Requested size: 295.90025pt x 219.61661pt.
-
-
-[5 <./Images/103.Venn Diagram.jpeg>]
-<Images/104.Fundamental Theorems.jpeg, id=234, 344.28625pt x 246.9225pt>
-File: Images/104.Fundamental Theorems.jpeg Graphic file (type jpg)
-<use Images/104.Fundamental Theorems.jpeg>
-Package pdftex.def Info: Images/104.Fundamental Theorems.jpeg  used on input line 371.
-(pdftex.def)             Requested size: 154.92737pt x 111.11409pt.
-
-
-[6 <./Images/104.Fundamental Theorems.jpeg>]
-<Images/136.Probability Two way table.jpeg, id=245, 516.93124pt x 189.70876pt>
-File: Images/136.Probability Two way table.jpeg Graphic file (type jpg)
-<use Images/136.Probability Two way table.jpeg>
-Package pdftex.def Info: Images/136.Probability Two way table.jpeg  used on input line 426.
-(pdftex.def)             Requested size: 232.6169pt x 85.36813pt.
-
-
-[7 <./Images/136.Probability Two way table.jpeg>]
-
-[8{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
-<Images/106.Discrete variable.jpeg, id=271, 1027.84pt x 491.8375pt>
-File: Images/106.Discrete variable.jpeg Graphic file (type jpg)
-<use Images/106.Discrete variable.jpeg>
-Package pdftex.def Info: Images/106.Discrete variable.jpeg  used on input line 541.
-(pdftex.def)             Requested size: 154.16934pt x 73.77243pt.
-<Images/201.Discrete uniform distribution.jpeg, id=272, 1142.2675pt x 691.58376pt>
-File: Images/201.Discrete uniform distribution.jpeg Graphic file (type jpg)
-<use Images/201.Discrete uniform distribution.jpeg>
-Package pdftex.def Info: Images/201.Discrete uniform distribution.jpeg  used on input line 587.
-(pdftex.def)             Requested size: 148.49998pt x 89.90904pt.
-
-
-[9 <./Images/106.Discrete variable.jpeg> <./Images/201.Discrete uniform distribution.jpeg>]
-<Images/202.Bernoulli Distribution.jpeg, id=284, 1142.2675pt x 691.58376pt>
-File: Images/202.Bernoulli Distribution.jpeg Graphic file (type jpg)
-<use Images/202.Bernoulli Distribution.jpeg>
-Package pdftex.def Info: Images/202.Bernoulli Distribution.jpeg  used on input line 606.
-(pdftex.def)             Requested size: 205.59927pt x 124.4797pt.
-
-
-[10 <./Images/202.Bernoulli Distribution.jpeg>]
-<Images/203.Binomial Distribution.jpeg, id=293, 1142.2675pt x 691.58376pt>
-File: Images/203.Binomial Distribution.jpeg Graphic file (type jpg)
-<use Images/203.Binomial Distribution.jpeg>
-Package pdftex.def Info: Images/203.Binomial Distribution.jpeg  used on input line 705.
-(pdftex.def)             Requested size: 262.716pt x 159.06091pt.
-
-
-[11 <./Images/203.Binomial Distribution.jpeg>]
-<Images/204.Hypergeometric Distribution.jpeg, id=304, 1142.2675pt x 691.58376pt>
-File: Images/204.Hypergeometric Distribution.jpeg Graphic file (type jpg)
-<use Images/204.Hypergeometric Distribution.jpeg>
-Package pdftex.def Info: Images/204.Hypergeometric Distribution.jpeg  used on input line 747.
-(pdftex.def)             Requested size: 262.716pt x 159.06091pt.
-
-
-[12 <./Images/204.Hypergeometric Distribution.jpeg>]
-<Images/205.Geometric Distribution.jpeg, id=312, 1142.2675pt x 691.58376pt>
-File: Images/205.Geometric Distribution.jpeg Graphic file (type jpg)
-<use Images/205.Geometric Distribution.jpeg>
-Package pdftex.def Info: Images/205.Geometric Distribution.jpeg  used on input line 789.
-(pdftex.def)             Requested size: 262.716pt x 159.06091pt.
-
-
-[13 <./Images/205.Geometric Distribution.jpeg>]
-<Images/206.negative binomial.jpeg, id=323, 1142.2675pt x 691.58376pt>
-File: Images/206.negative binomial.jpeg Graphic file (type jpg)
-<use Images/206.negative binomial.jpeg>
-Package pdftex.def Info: Images/206.negative binomial.jpeg  used on input line 825.
-(pdftex.def)             Requested size: 262.716pt x 159.06091pt.
-
-
-[14 <./Images/206.negative binomial.jpeg>]
-<Images/207.Poisson Distribution.jpeg, id=333, 1142.2675pt x 691.58376pt>
-File: Images/207.Poisson Distribution.jpeg Graphic file (type jpg)
-<use Images/207.Poisson Distribution.jpeg>
-Package pdftex.def Info: Images/207.Poisson Distribution.jpeg  used on input line 865.
-(pdftex.def)             Requested size: 285.56618pt x 172.89551pt.
-<Images/107.Discrete probabilty model tabel.jpeg, id=334, 907.39pt x 440.64626pt>
-File: Images/107.Discrete probabilty model tabel.jpeg Graphic file (type jpg)
-<use Images/107.Discrete probabilty model tabel.jpeg>
-Package pdftex.def Info: Images/107.Discrete probabilty model tabel.jpeg  used on input line 876.
-(pdftex.def)             Requested size: 453.6939pt x 220.32259pt.
-
-Overfull \hbox (12.67615pt too wide) in paragraph at lines 876--877
- [][] 
- []
-
-
-
-[15 <./Images/207.Poisson Distribution.jpeg> <./Images/107.Discrete probabilty model tabel.jpeg>]
-<Images/108.Continuous Random Variable.jpeg, id=344, 1798.72pt x 578.16pt>
-File: Images/108.Continuous Random Variable.jpeg Graphic file (type jpg)
-<use Images/108.Continuous Random Variable.jpeg>
-Package pdftex.def Info: Images/108.Continuous Random Variable.jpeg  used on input line 905.
-(pdftex.def)             Requested size: 269.79636pt x 86.72025pt.
-<Images/137.Uniform distribution.jpeg, id=345, 692.5875pt x 459.7175pt>
-File: Images/137.Uniform distribution.jpeg Graphic file (type jpg)
-<use Images/137.Uniform distribution.jpeg>
-Package pdftex.def Info: Images/137.Uniform distribution.jpeg  used on input line 941.
-(pdftex.def)             Requested size: 173.14644pt x 114.9291pt.
-
-
-[16 <./Images/108.Continuous Random Variable.jpeg (PNG copy)>]
-<Images/138.Esponential Distribution.jpeg, id=353, 1143.27126pt x 691.58376pt>
-File: Images/138.Esponential Distribution.jpeg Graphic file (type jpg)
-<use Images/138.Esponential Distribution.jpeg>
-Package pdftex.def Info: Images/138.Esponential Distribution.jpeg  used on input line 982.
-(pdftex.def)             Requested size: 228.65019pt x 138.3143pt.
-
-
-[17 <./Images/137.Uniform distribution.jpeg> <./Images/138.Esponential Distribution.jpeg>]
-<Images/139.Gamma Distribution.jpeg, id=364, 1143.27126pt x 691.58376pt>
-File: Images/139.Gamma Distribution.jpeg Graphic file (type jpg)
-<use Images/139.Gamma Distribution.jpeg>
-Package pdftex.def Info: Images/139.Gamma Distribution.jpeg  used on input line 1018.
-(pdftex.def)             Requested size: 228.65019pt x 138.3143pt.
-<Images/140.beta distribution.jpeg, id=365, 1143.27126pt x 691.58376pt>
-File: Images/140.beta distribution.jpeg Graphic file (type jpg)
-<use Images/140.beta distribution.jpeg>
-Package pdftex.def Info: Images/140.beta distribution.jpeg  used on input line 1059.
-(pdftex.def)             Requested size: 228.65019pt x 138.3143pt.
-
-
-[18 <./Images/139.Gamma Distribution.jpeg>]
-<Images/110.Normal Distribution.jpeg, id=376, 489.83pt x 289.08pt>
-File: Images/110.Normal Distribution.jpeg Graphic file (type jpg)
-<use Images/110.Normal Distribution.jpeg>
-Package pdftex.def Info: Images/110.Normal Distribution.jpeg  used on input line 1094.
-(pdftex.def)             Requested size: 220.42146pt x 130.0848pt.
-
-
-[19 <./Images/140.beta distribution.jpeg> <./Images/110.Normal Distribution.jpeg>]
-<Images/111.Standardize Normal Distribution.jpeg, id=388, 825.0825pt x 250.9375pt>
-File: Images/111.Standardize Normal Distribution.jpeg Graphic file (type jpg)
-<use Images/111.Standardize Normal Distribution.jpeg>
-Package pdftex.def Info: Images/111.Standardize Normal Distribution.jpeg  used on input line 1128.
-(pdftex.def)             Requested size: 346.53229pt x 105.39302pt.
-
-
-[20 <./Images/111.Standardize Normal Distribution.jpeg>]
-<Images/112.Chi-square and probability table.jpeg, id=396, 993.7125pt x 360.34625pt>
-File: Images/112.Chi-square and probability table.jpeg Graphic file (type jpg)
-<use Images/112.Chi-square and probability table.jpeg>
-Package pdftex.def Info: Images/112.Chi-square and probability table.jpeg  used on input line 1175.
-(pdftex.def)             Requested size: 397.47795pt x 144.13594pt.
-
-
-[21 <./Images/112.Chi-square and probability table.jpeg>]
-
-[22]
-<Images/113.t-student and probability table.jpeg, id=411, 978.65625pt x 268.00125pt>
-File: Images/113.t-student and probability table.jpeg Graphic file (type jpg)
-<use Images/113.t-student and probability table.jpeg>
-Package pdftex.def Info: Images/113.t-student and probability table.jpeg  used on input line 1340.
-(pdftex.def)             Requested size: 371.89323pt x 101.84152pt.
-
-
-[23 <./Images/113.t-student and probability table.jpeg>]
-<Images/114. F-Snedecor-Fisher and Probability Table.jpeg, id=419, 934.49126pt x 266.9975pt>
-File: Images/114. F-Snedecor-Fisher and Probability Table.jpeg Graphic file (type jpg)
-<use Images/114. F-Snedecor-Fisher and Probability Table.jpeg>
-Package pdftex.def Info: Images/114. F-Snedecor-Fisher and Probability Table.jpeg  used on input line 1442.
-(pdftex.def)             Requested size: 420.51718pt x 120.14775pt.
-
-
-[24]
-
-[25 <./Images/114. F-Snedecor-Fisher and Probability Table.jpeg>]
-
-[26]
-
-[27] (./9.Probability_Model.aux)
+[5] (./10.Sampling Distributions.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `9.Probability_Model.out' has not changed.
-(rerunfilecheck)             Checksum: 7F7CC729010BDA2CA82FDC95402ED9A6;7075.
+Package rerunfilecheck Info: File `"10.Sampling Distributions".out' has not changed.
+(rerunfilecheck)             Checksum: 71303B7966D2B0BD29641AA8E5A1388E;1540.
  ) 
 Here is how much of TeX's memory you used:
- 33906 strings out of 473190
- 688474 string characters out of 5715799
- 1110671 words of memory out of 5000000
- 56397 multiletter control sequences out of 15000+600000
- 650301 words of font info for 97 fonts, out of 8000000 for 9000
+ 33430 strings out of 473190
+ 675362 string characters out of 5715799
+ 1107107 words of memory out of 5000000
+ 56049 multiletter control sequences out of 15000+600000
+ 635637 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,10n,101p,1572b,1044s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 9.Probability_Model.pdf (27 pages, 2239126 bytes).
+ 98i,12n,101p,1580b,641s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on "10.Sampling Distributions.pdf" (5 pages, 318172 bytes).
 PDF statistics:
- 557 PDF objects out of 1000 (max. 8388607)
- 418 compressed objects within 5 object streams
- 134 named destinations out of 1000 (max. 500000)
- 496 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 184 PDF objects out of 1000 (max. 8388607)
+ 121 compressed objects within 2 object streams
+ 16 named destinations out of 1000 (max. 500000)
+ 215 words of extra memory for PDF output out of 10000 (max. 10000000)
 

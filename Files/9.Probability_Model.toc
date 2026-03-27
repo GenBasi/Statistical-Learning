@@ -20,3 +20,10 @@
 \contentsline {subsubsection}{\numberline {1.5.1}Combinatorial Calculus}{8}{subsubsection.1.5.1}%
 \contentsline {subsubsection}{\numberline {1.5.2}Discrete Random Variables}{8}{subsubsection.1.5.2}%
 \contentsline {subsubsection}{\numberline {1.5.3}Discrete Probability Models}{9}{subsubsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.6}Continuous Random Variables and Probability Models}{16}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Continuous Random Variables (PDF \& CDF)}{16}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Key Continuous Probability Models}{16}{subsubsection.1.6.2}%
+\contentsline {subsubsection}{\numberline {1.6.3}The Normal (Gaussian) Distribution}{19}{subsubsection.1.6.3}%
+\contentsline {subsubsection}{\numberline {1.6.4}Sampling Distributions (Transformations of Normal)}{20}{subsubsection.1.6.4}%
+\contentsline {subsection}{\numberline {1.7}Final Exam-Oriented Questions I Must Be Able to Answer}{26}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}Probability Model: Simple Summary with the Main Exam Questions Answered}{26}{subsubsection.1.7.1}%

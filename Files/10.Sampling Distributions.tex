@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+% --- Encoding e font ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% --- Matematica ---
+\usepackage{amsmath,amssymb,amsfonts,gensymb,amsthm}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\usepackage{centernot}
+% --- Grafica, colori, float ---
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+% --- Liste e ambienti ---
+\usepackage{enumitem}
+% --- Caption, numerazione figure ---
+\usepackage{caption}
+\usepackage{chngcntr}
+% --- Caption, numerazione figure ---
+\captionsetup{font=small, labelfont=bf, textfont=it}
+% --- Indice/TOC personalizzazione (se ti serve) ---
+\usepackage{tocloft}
+% --- colorbox
+\usepackage[most]{tcolorbox}
+%--- spazio tra le riga
+\usepackage{parskip}
+\setlength{\parskip}{0.15cm}
+% Elenchi compatti:
+\setlist[itemize]{ topsep=2pt, itemsep=0pt, parsep=0pt}
+\setlist[enumerate]{topsep=2pt, itemsep=0pt, parsep=0pt}
+
+% Per il codice
+\usepackage{listings}
+% Definisci i colori esatti di VS Code (tema Light+)
+\definecolor{vscodeblue}{RGB}{0,0,255}          % Keywords
+\definecolor{vscodeorange}{RGB}{163,21,21}      % Strings
+\definecolor{vscodegreen}{RGB}{0,128,0}         % Comments
+\definecolor{vscodepurple}{RGB}{197,134,192}    % Control flow e import
+\definecolor{vscodeyellow}{RGB}{121,94,38}      % Functions
+\definecolor{vscodebg}{RGB}{255,255,255}        % Background
+\definecolor{vscodeframe}{RGB}{200,200,200}     % Frame
+
+% Configurazione Python stile VS Code
+\lstdefinestyle{vscode}{
+    language=Python,
+    alsoletter={.},
+    backgroundcolor=\color{vscodebg},
+    commentstyle=\color{vscodegreen}\itshape,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{vscodeorange},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=8pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{vscodeframe},
+    framesep=10pt,
+    xleftmargin=15pt,
+    framexleftmargin=15pt,
+    % Resetta tutte le keyword e ridefiniscile
+    morekeywords={},
+    deletekeywords={for,if,while,else,elif,return,break,continue,try,except,finally,with,as,pass,raise,assert,import,from},
+    % Keywords blu
+    keywordstyle=\color{vscodeblue}\bfseries,
+    morekeywords={def,class,lambda,and,or,not,is,in,del,global,nonlocal,yield,await,async,True,False,None,self},
+    % Control flow VIOLA
+    keywordstyle=[2]\color{vscodepurple}\bfseries,
+    morekeywords=[2]{for,if,while,else,elif,return,break,continue,try,except,finally,with,as,pass,raise,assert,import,from},
+    % Funzioni
+    emph={sqrt,print,input,range,len,str,int,float,list,dict,set,tuple},
+    emphstyle=\color{vscodeyellow}
+}
+\lstset{style=vscode}
+
+%-- for definition (POI definisci defbox)
+\newtcolorbox{defbox}[1]{
+    colback=gray!10,
+    colframe=gray!50,
+    fonttitle=\bfseries,
+    coltitle=black,
+    title=\mbox{#1},  % Cambiato qui
+    sharp corners,
+    boxrule=0.5pt, breakable}
+%-----
+%-----
+\usepackage{needspace}
+%---- Notebox definition \begin{noteboxtitle}{title}
+\newtcolorbox{noteboxtitle}[1]{
+    colback=white,
+    colframe=black!90,
+    boxrule=0.8pt,
+    arc=3mm,
+    title=#1,
+    fonttitle=\bfseries,
+    left=5pt,
+    right=5pt,
+    top=5pt,
+    bottom=5pt,
+      breakable
+}
+
+% --- comment
+\usepackage{comment}
+% --- Margini ---
+\usepackage[a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    bindingoffset=0.5cm
+]{geometry}
+% --- Titolo con immagine (opzionale) ---
+\usepackage{titlepic} % solo se usi \titlepic
+% --- Hyperref VA QUASI SEMPRE PER ULTIMO ---
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{xltabular}
+\usepackage{booktabs}
+\raggedbottom
+
+
+%---Per spezzare le tabelle
+\usepackage{longtable}
+
+
+% --- New structure for Example
+\newtheoremstyle{smallexample}
+  {3pt}% Space above
+  {3pt}% Space below
+  {\small}% Body font - testo dell'esempio piccolo
+  {}% Indent amount
+  {\small\bfseries}% Theorem head font - "Example 18.1" piccolo e grassetto
+  {.}% Punctuation after theorem head
+  {.5em}% Space after theorem head
+  {}% Theorem head spec
+\theoremstyle{smallexample}
+\newtheorem{example}{Example}[section]
+\usepackage[version=4]{mhchem}
+\graphicspath{{Images/}}
+
+ %% --- Definizione prima pagina 
+
+
+%%___NEW COMMAND
+\newcommand{\vs}{\vspace{0.2\baselineskip}}
+
+
+
+%%%--- Librerie per grafici
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric, calc}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins}
+
+
+
+\parindent 0px
+\title{\Huge Statistical Learning}
+\author{\Large Gennaro Basile}
+\date{\today}
+
+\titlepic{
+    \begin{center}
+        \includegraphics[scale=1]{0.png}
+    \end{center}}
+
+
+
+\begin{document}
+\maketitle
+\counterwithin{figure}{subsection}
+\captionsetup[figure]{labelfont=bf}
+
+\pagebreak
+
+%% -- Sommario
+\tableofcontents
+\pagebreak
+
+
+
+\section{Sampling Distributions \& The Central Limit Theorem}
+
+\subsection{The Three Fundamental Distributions}
+In Data Science, you will constantly calculate metrics (like the mean) from a subset of data. The ultimate goal is to understand if the mean of your \textit{sample} accurately reflects the reality of the entire \textit{population}. 
+
+To do this without confusion, we must strictly separate three concepts:
+
+\begin{defbox}{1. Population Distribution (\textit{The Hidden Truth})}
+The abstract, true probability distribution of the entire population. In the real world, you almost never have access to this. It has a true mean ($\mu$) and true variance ($\sigma^2$).
+\end{defbox}
+
+\begin{defbox}{2. Sample Data Distribution (\textit{Your DataFrame})}
+The actual, physical data you collected (e.g., $n=25$ restaurant bills). You can plot this as a histogram. It has a sample mean ($\bar{y}$) and sample standard deviation ($s$). As your dataset grows ($n \to \infty$), this histogram will start to look exactly like the Population Distribution.
+\end{defbox}
+
+\begin{defbox}{3. Sampling Distribution (\textit{The Theoretical Metric})}
+This is the hardest concept to grasp. Imagine you collect $1,000$ different samples of 25 bills, and calculate the mean for \textit{each} sample. If you plot those $1,000$ means on a new histogram, you get the \textbf{Sampling Distribution of the Mean}. It tells you how much your sample mean is expected to fluctuate simply due to random luck.
+\end{defbox}
+
+\textbf{The Standard Error (SE):} 
+The standard deviation of this new Sampling Distribution is called the Standard Error:
+\begin{equation}
+    SE(\bar{Y}) = \frac{\sigma}{\sqrt{n}}
+\end{equation}
+\textit{Data Science Takeaway:} Notice the $\sqrt{n}$ in the denominator. To cut your error margin in half, you don't need twice as much data; you need \textbf{four times} as much data.
+
+\subsection{Chebyshev's Inequality: The Safety Net}
+In the real world, data is rarely perfectly Normal (Gaussian). What if your data distribution is completely unknown or highly skewed?
+
+\begin{defbox}{Chebyshev's Inequality}
+For \textit{any} random variable $X$ with a known mean $\mu$ and variance $\sigma^2$, the probability that a value falls within $k$ standard deviations from the mean is at least:
+\begin{equation}
+    P(|X - \mu| < k\sigma) \geq 1 - \frac{1}{k^2}
+\end{equation}
+\end{defbox}
+
+\textbf{Why it matters:} If $k=2$, $1 - (1/4) = 0.75$. This guarantees that \textit{no matter how weird or skewed your data is}, at least 75\% of your observations will always fall within 2 standard deviations of the mean. It is the ultimate statistical worst-case scenario bound.
+
+\subsection{Convergence Laws: Why \textit{Big Data} Works}
+As your sample size ($n$) approaches infinity, uncertainty vanishes.
+
+\begin{itemize}
+    \item \textbf{Convergence in Distribution ($\xrightarrow{d}$):} The \textit{shape} of your sample's distribution starts to match the target distribution. (This is the basis of the Central Limit Theorem).
+    \item \textbf{Convergence in Probability ($\xrightarrow{p}$):} The probability that your sample estimate is wrong shrinks to exactly zero.
+\end{itemize}
+
+\begin{defbox}{The Law of Large Numbers (LLN)}
+\begin{itemize}
+    \item \textbf{Weak LLN:} As $n$ grows, the probability that your sample mean $\bar{X}$ differs from the true mean $\mu$ by any tiny amount ($\varepsilon$) approaches zero.
+    \item \textbf{Strong LLN:} The sample mean \textit{will} converge to the true mean with a probability of exactly 1.
+\end{itemize}
+\end{defbox}
+
+\subsection{The Central Limit Theorem (CLT)}
+This is arguably the most important theorem in all of statistics and machine learning.
+
+\begin{defbox}{Central Limit Theorem}
+Take \textit{any} population distribution (it can be heavily skewed, bimodal, or uniform). If you draw large enough samples ($n \geq 30$) and calculate their means, the distribution of those sample means will form a \textbf{perfect Normal (Gaussian) Distribution}.
+\begin{equation}
+   \bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right) 
+\end{equation}
+\end{defbox}
+
+\textit{Data Science Takeaway:} The CLT is the reason why the Normal distribution is the default assumption for so many Machine Learning algorithms (like Linear Regression residuals). Because many real-world phenomena are the sum of thousands of tiny, independent random events, the resulting data naturally converges to a Gaussian shape.
+
+    \begin{figure}[H] 
+        \centering\includegraphics[scale=0.45]{138.Central Limit Theorem.jpeg}
+        \caption{Central Limit Theorem: Regardless of the starting population shape (top row), the sampling distribution of the mean becomes perfectly Normal as sample size $n$ increases (bottom row).}
+        \captionsetup{font=footnotesize}
+        \label{fig-Central Limit Theorem}
+    \end{figure}
+
+\subsection{Sum of Independent Random Variables}
+In Machine Learning, we constantly aggregate features or build ensembles (like summing the outputs of multiple decision trees). What happens when you add probability distributions together?
+
+\begin{defbox}{Closure Under Convolution}
+\begin{itemize}
+    \item \textbf{Normal + Normal = Normal:} If you add two independent Normal variables, the result is still perfectly Normal. (The means add up, and the variances add up).
+    \item \textbf{Binomial + Binomial = Binomial:} Only if they share the exact same success probability $\pi$.
+    \item \textbf{Poisson + Poisson = Poisson:} The rate parameters ($\lambda$) simply add together.
+\end{itemize}
+\end{defbox}
+\end{document}
