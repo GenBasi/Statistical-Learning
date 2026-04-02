@@ -1,0 +1,223 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Preparation}
+
+\subsection{The Fundamental Principle}
+
+Data preparation is a critical, yet often underestimated, phase in any data analysis workflow. The fundamental rule to remember is: \textbf{The available data are never ready for data analysis processing. They need to be pre-processed.}
+
+This principle is reinforced by the \textbf{GIGO (Garbage In -- Garbage Out)} concept from Information Technology: the quality of outputs is entirely determined by the quality of inputs. No matter how sophisticated our analytical methods or machine learning algorithms are, feeding them poor quality data will inevitably lead to unreliable, biased, or useless results.
+
+%==============================================================================
+\subsubsection{Real-World Data Challenges: A Marketing Example}
+%==============================================================================
+
+Consider a practical scenario: you are a data analyst working on a marketing task. You have access to your company's data warehouse and need to identify features like item descriptions, prices, units sold, shop type, and city. However, upon examining the raw SQL extract, you discover several severe issues:
+
+\begin{itemize}
+    \item \textbf{Incomplete data}: Many features have missing values. You might not know whether a specific item was purchased during a promotional period because the cashier forgot to scan the promo code.
+    
+    \item \textbf{Inaccurate/Noisy data}: There are unusual values suggesting data entry errors. For example, you might find a premium product priced at \$0.01 when it should be \$100.00, or quantities sold listed as `99999` (which is likely a legacy IT placeholder or error code, not a real purchase).
+    
+    \item \textbf{Inconsistent data}: You encounter discrepancies in coding. "New York" is recorded as "NY", "New York", "new york", and "N.Y." across different regional databases.
+\end{itemize}
+
+Welcome to the real world! The raw format of real data is highly chaotic. This reality leads to the bulk of a Data Scientist's workload.
+
+%==============================================================================
+\subsection{Data Quality Dimensions}
+%==============================================================================
+
+Data has \textit{quality} if it can be used effectively and reliably for decision-making. The six key dimensions of data quality are:
+
+\begin{enumerate}
+    \item \textbf{Accuracy}: How closely data values match the true real-world values (e.g., an age recorded as 125 is inaccurate).
+    \item \textbf{Completeness}: How much of the required data is actually present (e.g., if 30\% of customer emails are missing, the column is 70\% complete).
+    \item \textbf{Consistency}: Whether the same information is recorded uniformly across different tables (e.g., is gender always "M/F", or does it mix with "1/0"?).
+    \item \textbf{Timeliness}: Whether data is sufficiently up-to-date for the specific task (e.g., 5-minute delayed stock prices are useless for high-frequency algorithmic trading).
+    \item \textbf{Reliability}: Can we trust the collection method? (e.g., Calibrated IoT sensors are more reliable than manually typed user forms).
+    \item \textbf{Interpretability}: Is the meaning of the data clear? (e.g., A column named `status\_code` with values `1, 2, 3` is uninterpretable without a data dictionary).
+\end{enumerate}
+
+%==============================================================================
+\subsection{Data Preparation - Main Steps}
+%==============================================================================
+
+In practice, Data Scientists spend approximately \textbf{60-80\% of their time} on data preparation activities, far more than on the actual machine learning modeling phase. The transformation process encompasses three fundamental activities:
+
+\begin{enumerate}
+    \item \textbf{Feature Extraction and Portability}: Raw data often comes in formats unsuitable for direct mathematical processing (text, images, logs).
+    \begin{itemize}
+        \item \textit{Example:} A text review like "This product is excellent" must be transformed into a numerical sentiment score (e.g., +0.9) or a word-frequency vector.
+    \end{itemize}
+    
+    \vspace{0.15cm}
+    \item \textbf{Data Cleaning}: Removing erroneous entries and handling missing values through imputation methods.
+    \begin{itemize}
+        \item \textit{Example:} Removing duplicate transaction rows, fixing obvious typos, and replacing missing `Income` values with the median income of the dataset.
+    \end{itemize}
+
+    \vspace{0.15cm}
+    \item \textbf{Data Reduction, Selection, and Transformation}: Reducing the size and complexity of the dataset.
+    \begin{itemize}
+        \item \textbf{Data subset selection}: Filtering rows (e.g., dropping users who haven't logged in for 3 years).
+        \item \textbf{Feature subset selection}: Dropping irrelevant columns (Dim. Reduction).
+        \begin{itemize}[label=*]
+        \item \textit{Benefit:} Faster computation and improved model accuracy by removing noise.
+      \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{The 8 Basic Issues in Data Preparation}
+Data preparation involves systematically addressing these eight questions:
+\begin{enumerate}
+    \item \textbf{Cleansing}: How do I fix errors?
+    \item \textbf{Transformation}: How do I scale or encode the variables?
+    \item \textbf{Imputation}: What do I do with `NaN` (missing) values?
+    \item \textbf{Weighting}: Are all cases treated the same, or are some more important?
+    \item \textbf{Filtering}: How do I handle massive outliers?
+    \item \textbf{Abstraction}: How do I handle temporal (time-series) data?
+    \item \textbf{Reduction}: Can I drop rows (Sampling) or columns (Dimensionality Reduction)?
+    \item \textbf{Derivation}: Can I mathematically combine columns to create better ones (Feature Engineering)?
+\end{enumerate}
+
+%==============================================================================
+\subsection{Data Transformation Types}
+%==============================================================================
+
+\subsubsection{Normalization (Scaling)}
+
+\begin{defbox}{Normalization}
+ Normalization scales numerical values within a fixed range. It is mathematically required for any distance-based machine learning algorithm (like K-Means, KNN, or Neural Networks) to prevent features with large numeric scales from dominating features with small numeric scales.
+\end{defbox}
+
+\textbf{The Problem:} If you are predicting house prices using `Living Area` (ranges from 500 to 5000 sq ft) and `Number of Bedrooms` (ranges from 1 to 5), the algorithm will completely ignore the bedrooms because the raw numbers for Area are 1000x larger.
+
+\begin{itemize}
+    \item \textbf{Min-Max Scaling (Normalization)}: Transforms all values to a strict $[0, 1]$ range.
+    \begin{equation}
+        x' = \frac{x - x_{min}}{x_{max} - x_{min}}
+    \end{equation}
+    \textit{Example:} For an area of 2000 (min=500, max=5000): $x' = \frac{2000 - 500}{5000 - 500} = 0.333$
+    
+    \vspace{0.2cm}
+    \item \textbf{Standardization (Z-Score Normalization)}: Centers the data at $0$ and scales it so that $1$ unit equals $1$ Standard Deviation. It does not bound data to a specific range, making it highly robust to outliers.
+    \begin{equation}
+        x' = \frac{x - \mu}{\sigma}
+    \end{equation}
+    \textit{Example:} If the mean salary is \$50k and standard deviation is \$15k, a salary of \$65k becomes $x' = 1.0$ (exactly one standard deviation above average).
+\end{itemize}
+
+\textit{Note: Min-Max scaling is highly sensitive to outliers. A single billionaire in your dataset will squash everyone else's income down to $0.0001$.}
+
+\subsubsection{Discretization }
+
+\begin{defbox}{Discretization}
+Discretization replaces continuous numerical values with discrete categorical intervals (bins).
+\end{defbox}
+
+\textbf{Methods}:
+\begin{enumerate}
+    \item \textbf{Equi-width intervals}: Divide the range into $k$ equal-length mathematical buckets. (e.g., Age ranges: [0-20), [20-40), [40-60)).
+    \item \textbf{Equi-depth intervals (Quantiles)}: Create buckets that contain the exact same number of rows. (e.g., splitting 1000 customers into 4 income quartiles of 250 people each).
+    \item \textbf{Equi-log intervals}: Geometrically increasing buckets (e.g., [0-10k), [10k-100k), [100k-1M)).
+    \item \textbf{Domain criterion}: Using human business logic (e.g., Credit Scores: Poor <580, Good >670).
+\end{enumerate}
+
+\subsubsection{Recoding, Feature Construction, and Aggregation}
+
+\begin{itemize}
+    \item \textbf{Recoding:} Grouping too many categories into fewer, broader ones. (e.g., grouping 200 individual countries into 5 "Continent" categories to prevent the model from overfitting).
+    \item \textbf{Feature Construction (Engineering):} Creating new mathematical features from existing ones. (e.g., `Age = Current\_Year - Birth\_Year` or a boolean flag `I\_Millennial`).
+    \item \textbf{Aggregation:} Rolling up granular data into summaries. (e.g., converting daily transaction logs into `Monthl\_Total\_Spend` per user).
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Categorical to Numeric Transformations (Encoding)}
+%==============================================================================
+
+Machine Learning models only understand math; they cannot read text like "Apartment".
+
+\textbf{1. Binarization (Label Encoding)} \\
+For binary variables, use simple 0/1 encoding. 
+\begin{itemize}
+    \item Gender: Male = 0, Female = 1
+    \item Churn: Retained = 0, Cancelled = 1
+\end{itemize}
+
+\textbf{2. One-Hot Encoding (OHE)} \\
+For nominal variables with $K$ categories (where there is no mathematical order), you must create $K$ separate binary columns.
+
+\begin{example}{\textbf{Why simple numbering fails for categories}}
+
+If you have property types: Apartment, Villa, Penthouse. 
+
+\textbf{Wrong Approach:} 
+
+Apartment = 1, Villa = 2, Penthouse = 3. 
+\textit{Why?} The algorithm will literally calculate that a Penthouse (3) is mathematically equal to an Apartment (1) plus a Villa (2). It creates fake math.
+
+\pagebreak
+\textbf{Correct Approach (One-Hot Encoding):}
+\vs
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Property\_Type} & \textbf{Is\_Apartment} & \textbf{Is\_Villa} & \textbf{Is\_Penthouse} \\
+\hline
+1 & Apartment & 1 & 0 & 0 \\
+2 & Villa & 0 & 1 & 0 \\
+3 & Penthouse & 0 & 0 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vs
+This allows the model to learn the independent price impact of each property type.
+\end{example}
+
+%==============================================================================
+\subsubsection{Text to Numeric Data (NLP Basics)}
+%==============================================================================
+
+To analyze raw text (like reviews or tweets), we must convert words into matrices. 
+
+\begin{enumerate}
+    \item \textbf{Tokenization}: Breaking a sentence into an array of individual words.
+    \item \textbf{Stop Word Removal}: Deleting useless connecting words ("the", "is", "at").
+    \item \textbf{Stemming/Lemmatization}: Chopping words down to their root form ("running", "ran" $\rightarrow$ "run").
+    \item \textbf{TF-IDF (Term Frequency-Inverse Document Frequency)}: A scoring system that gives high weight to words that appear frequently in a specific document, but penalizes words that appear everywhere across all documents (meaning they are generic and useless for classification).
+    \begin{equation}
+        \text{TF-IDF}(t,d) = \text{TF}(t,d) \times \log\left(\frac{N}{\text{DF}(t)}\right)
+    \end{equation}
+\end{enumerate}
+The final output is a massive \textbf{Document-Term Matrix} where rows are documents, columns are specific vocabulary words, and the cells contain the TF-IDF math score.
+
+%==============================================================================
+\subsection{Data Cleaning: Handling Missing and Incorrect Data}
+%==============================================================================
+
+Data is often missing because users refuse to answer (privacy), sensors break, or manual entry is flawed. We have two main strategies for missing data:
+
+\textbf{1. Deletion Approaches (Listwise Deletion)}
+\begin{itemize}
+    \item Simply dropping any row that contains a `NaN` value. 
+    \item \textit{Danger:} If 20\% of your rows have at least one missing column, dropping them destroys 20\% of your entire dataset. It also introduces massive bias if the missing data is not random (e.g., wealthy people refusing to answer the income question).
+\end{itemize}
+
+\textbf{2. Imputation Approaches (Guessing the missing value)}
+\begin{itemize}
+    \item \textbf{Mean/Median imputation}: Fast, but artificially reduces the variance of the column.
+    \item \textbf{Regression imputation}: Using a machine learning model to predict the missing value based on the other columns (e.g., predicting missing `Income` based on `Age` and `Education`).
+    \item \textbf{Interpolation (Time-Series)}: If Tuesday's temperature is missing, you average Monday (72°F) and Wednesday (76°F) to guess Tuesday (74°F).
+\end{itemize}
+
+\textbf{Handling Outliers \& Inconsistencies}
+\begin{itemize}
+    \item \textbf{Inconsistency Detection:} Fixing formats (e.g., merging "J. Smith" and "John Smith").
+    \item \textbf{Domain Rules:} Hardcoding business logic (e.g., dropping rows where `Age < 0`).
+    \item \textbf{Statistical Outlier Detection:} Using the \textbf{Z-score method} (flagging any row where $Z > 3$, meaning it is more than 3 standard deviations away from the mean) or the \textbf{IQR method} (using boxplot quartiles).
+\end{itemize}
+
+\textit{Data Science Rule: Never blindly delete outliers. An outlier could be a typo, but it could also be a fraudulent transaction—which might be exactly what you are trying to detect!}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

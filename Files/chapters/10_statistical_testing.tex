@@ -1,0 +1,220 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statistical Testing}
+
+\subsection{Introduction to Statistical Testing}
+
+In Data Science, we rarely have access to the entire population. We make observations on a sample, and we need to decide if an observed effect (e.g., a higher click rate, a lower error loss) is a \textit{real signal} or just \textit{random noise}. This is the core purpose of Statistical Testing.
+
+\begin{defbox}{Statistical Testing}
+ Statistical testing is an inferential procedure used to verify the acceptance of a \textbf{null hypothesis} $H_0$ against an \textbf{alternative hypothesis} $H_1$ based on a sample derived from a population. 
+\end{defbox}
+
+The statistical test judges how coherent the sample is with being extracted from the population as defined by $H_0$, with respect to the test bed represented by $H_1$.
+
+Statistical testing can be classified into two main categories:
+
+\begin{itemize}
+ \item \textbf{Parametric testing}: Refers to hypotheses concerning a specific mathematical parameter of the population. For example:
+  \begin{itemize}
+   \item $H_0: \mu = \mu_0$ against $H_1: \mu > \mu_0$
+   \item $H_0: \sigma^2 = \sigma_0^2$ against $H_1: \sigma^2 \neq \sigma_0^2$
+  \end{itemize}
+  
+ \item \textbf{Non-parametric testing}: Refers to hypotheses concerning the overall probability model of the population, without assuming specific parameters. For example:
+  \begin{itemize}
+   \item $H_0: f(x, \theta) \sim N(\mu, \sigma^2)$ against $H_1$: The data does NOT follow a Normal distribution.
+  \end{itemize}
+\end{itemize}
+
+\begin{defbox}{Null Hypothesis ($H_0$) and Alternative Hypothesis ($H_1$)}
+ \begin{itemize}
+  \item \textbf{Null Hypothesis ($H_0$)}: The \textit{Status Quo} or \textit{No Effect} hypothesis. It assumes that any observed difference is just due to random chance. It is assumed to be true until the data proves otherwise.
+  
+  \item \textbf{Alternative Hypothesis ($H_1$)}: The \textit{Discovery} hypothesis. It represents what we suspect might actually be true (e.g., the new algorithm is faster, the coin is biased).
+ \end{itemize}
+\end{defbox}
+
+%==============================================================================
+\subsection{Key Elements in Statistical Testing}
+%==============================================================================
+
+\subsubsection{Testing Variable (Test Statistic)}
+
+\begin{defbox}{Testing Variable ($D_n$)}
+ The \textbf{testing variable} (or test statistic) $D_n$ is a random variable defined as a function of the $n$-dimensional random sample:
+ \[
+  D_n = d(X_1, X_2, \ldots, X_n)
+ \]
+ It is a mathematical transformation that compresses your raw data into a single, standardized number, allowing you to compare it against a known probability distribution table.
+\end{defbox}
+
+For example, when testing $H_0: \mu = \mu_0$ with known variance $\sigma^2$ (or large samples), the testing variable is the Z-score:
+\[
+ D_n = \frac{\bar{X}_n - \mu_0}{\sigma/\sqrt{n}} \sim N(0,1)
+\]
+The \textit{empirical value} $d_n$ is the actual number you calculate from your specific sample data.
+
+\subsubsection{Decision Rule: Acceptance and Rejection Regions}
+
+\begin{defbox}{Acceptance and Rejection Regions}
+ The decision rule splits all possible values of $D_n$ into two mutually exclusive zones:
+ \begin{itemize}
+\item \textbf{Acceptance Region ($A$)}: Values of $D_n$ that are highly probable under $H_0$. If $D_n \in A$, the observed data are consistent with $H_0$, so we \textbf{do not reject $H_0$}.
+  
+  \item \textbf{Rejection Region ($C$)}: Values of $D_n$ that are extremely unlikely under $H_0$. If $D_n \in C$, we \textbf{reject $H_0$} in favor of $H_1$.
+ \end{itemize}
+\end{defbox}
+
+When conducting a statistical test, we can make two correct decisions and two specific types of errors. In Data Science, this is conceptually identical to a \textbf{Confusion Matrix}.
+
+\vspace{0.3cm}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Reality / Decision} & \textbf{Reject $H_0$ ($D_n \in C$)} & \textbf{Accept $H_0$ ($D_n \in A$)} \\
+\hline
+$H_0$ is TRUE & \textbf{Error Type I} ($\alpha$) & Correct Decision ($1 - \alpha$) \\
+ (No real effect) & \textit{False Positive} & \textit{True Negative} \\
+\hline
+$H_0$ is FALSE & Correct Decision ($1 - \beta$) & \textbf{Error Type II} ($\beta$) \\
+ (Real effect exists) & \textbf{Power of the Test} (\textit{True Positive}) & \textit{False Negative} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.25cm}
+\begin{defbox}{Type I and Type II Errors}
+ \begin{itemize}
+  \item \textbf{Type I Error ($\alpha$)}: Rejecting $H_0$ when it is actually true. The probability of this error is denoted by $\alpha$ and is called the \textbf{Significance Level}. (e.g., Deploying a useless model to production thinking it's better).
+  
+  \item \textbf{Type II Error ($\beta$)}: Accepting $H_0$ when it is actually false. (e.g., Failing to deploy a great model because the test didn't detect its superiority).
+  
+  \item \textbf{Power of the Test ($1 - \beta$)}: The probability of correctly rejecting $H_0$ when a real effect truly exists.
+ \end{itemize}
+\end{defbox}
+
+\subsubsection{Decision Rules and Neyman-Pearson}
+
+\begin{defbox}{Significance Level ($\alpha$)}
+ The \textbf{significance level} $\alpha$ is the maximum probability of a Type I error that we are willing to tolerate. Because false positives are usually expensive (e.g., rolling out a bad feature to millions of users), we strictly control $\alpha$, typically setting it to $0.05$ (5\%), $0.01$ (1\%), or $0.001$ (0.1\%).
+\end{defbox}
+
+\begin{defbox}{Neyman-Pearson Lemma}
+ The \textbf{Neyman-Pearson Lemma} states that for a fixed significance level $\alpha$, the rejection region $C$ that minimizes the Type II error $\beta$ (thus maximizing the Power $1 - \beta$) is located at the extreme tails of the distribution under $H_0$.
+\end{defbox}
+
+\subsubsection{P-value and Decision Rule}
+
+\begin{defbox}{P-value}
+ The \textbf{p-value} is the probability of obtaining a test statistic at least as extreme as the one observed, \textit{assuming that the null hypothesis $H_0$ is perfectly true}:
+ \[
+  p = P(D_n > d_n | H_0)
+ \]
+ A lower p-value indicates stronger evidence against $H_0$. It represents how \textit{surprised} you should be by your data if the status quo were true.
+\end{defbox}
+
+\begin{defbox}{Decision Rule Based on P-value}
+ Given a chosen significance level $\alpha$:
+ \begin{itemize}
+  \item \textbf{Accept $H_0$} if $p > \alpha$ (The data is not surprising enough to prove an effect).
+  \item \textbf{Reject $H_0$} if $p \leq \alpha$ (The data is so surprising that $H_0$ is likely false).
+ \end{itemize}
+\end{defbox}
+
+%==============================================================================
+\subsection{Types of Hypotheses}
+%==============================================================================
+
+\begin{defbox}{Simple vs. Composite Hypotheses}
+ \begin{itemize}
+  \item \textbf{Simple Hypothesis:} Fully specifies the probability distribution. It pinpoints an exact parameter. \\
+  \textit{Example:} $H_0: p = 0.6$ or $H_0: \mu = 177$.
+  
+  \item \textbf{Composite Hypothesis:} Specifies a range or inequality, covering multiple possible distributions. \\
+  \textit{Example:} $H_0: p \leq 0.5$ or $H_1: \mu > 175$.
+ \end{itemize}
+\end{defbox}
+
+%==============================================================================
+\subsection{Testing Hypotheses about the Variance ($\sigma^2$)}
+%==============================================================================
+
+While means tell us about the center of the data, variance tells us about \textbf{stability}. If a manufacturing process or a predictive model suddenly increases its variance, it has become unreliable.
+
+
+
+\begin{defbox}{Test Statistic for a Single Variance}
+ For testing hypotheses about $\sigma^2$ in a normally distributed population, the test statistic is:
+ \begin{equation}
+     V = \frac{(n-1)S^2}{\sigma_0^2} \sim \chi^2_{n-1}
+ \end{equation}
+ where $S^2$ is the sample variance, $\sigma_0^2$ is the hypothesized variance under $H_0$, and $\chi^2_{n-1}$ is the Chi-Square distribution with $n-1$ degrees of freedom.
+\end{defbox}
+
+The rejection regions depend entirely on the alternative hypothesis $H_1$:
+\begin{itemize}
+ \item \textbf{Left Tail ($H_1: \sigma^2 < \sigma_0^2$)}: Reject if $V < \chi^2_{1-\alpha, n-1}$ (Testing for improved stability).
+ \item \textbf{Right Tail ($H_1: \sigma^2 > \sigma_0^2$)}: Reject if $V > \chi^2_{\alpha, n-1}$ (Testing for degradation/chaos).
+ \item \textbf{Two Tails ($H_1: \sigma^2 \neq \sigma_0^2$)}: Reject if $V$ falls in either extreme tail.
+\end{itemize}
+
+    \begin{figure}[H] 
+        \centering\includegraphics[scale=0.7]{137.Hypothesis systems and rejection regions for testing the hypothesis about sigma.jpg}
+        \caption{Hypothesis systems and rejection regions for testing the hypothesis about sigma}
+        \captionsetup{font=footnotesize}
+    \end{figure}
+
+
+
+%==============================================================================
+\subsection{Probability $\beta$ and the Power of the Test}
+%==============================================================================
+
+In practical Data Science, designing an experiment (like an A/B test) without calculating the Power of the Test is extremely risky. If your Power is too low, you might run a month-long test, find no significant difference, and falsely conclude the new feature failed (Type II error), when in reality, your sample size was simply too small to detect the improvement.
+
+
+
+\begin{itemize}
+ \item \textbf{Type I Error ($\alpha$)}: $P(\text{Reject } H_0 | H_0 \text{ is True})$. The area in the tail of the $H_0$ distribution.
+ \item \textbf{Type II Error ($\beta$)}: $P(\text{Accept } H_0 | H_1 \text{ is True})$. The area under the $H_1$ distribution that overlaps into the $H_0$ acceptance region.
+\end{itemize}
+
+\begin{defbox}{Power of the Test ($1 - \beta$)}
+ The \textbf{Power} is the probability of successfully detecting a real effect:
+ \[
+  \text{Power} = 1 - \beta = P(\text{Reject } H_0 | H_1 \text{ is True})
+ \]
+ 
+ \textbf{How to increase Power (make your test more sensitive):}
+ \begin{enumerate}
+  \item \textbf{Increase Sample Size ($n$):} (The most common solution in tech). This narrows the bell curves, reducing overlap.
+  \item \textbf{Increase Effect Size:} A larger true difference ($\mu_1 - \mu_0$) pushes the two curves further apart.
+  \item \textbf{Increase $\alpha$:} Relaxing your significance level increases Power, but guarantees more False Positives.
+  \item \textbf{Decrease Variance ($\sigma^2$):} Cleaner data with less noise makes the signal easier to detect.
+ \end{enumerate}
+\end{defbox}
+
+    \begin{figure}[H] 
+        \centering\includegraphics[scale=0.8]{138. beta.jpg}
+        \caption{$\beta$ probability and power of the test for the mean of a normal population}
+        \captionsetup{font=footnotesize}
+    \end{figure}
+
+\subsubsection{The Power Curve}
+
+The Power Curve visually maps how the test's sensitivity changes depending on what the "real" truth is. 
+
+\begin{itemize}
+ \item At $\mu = \mu_0$ (No effect), the Power is exactly $\alpha$ (you only reject by accident).
+ \item As the true mean $\mu$ moves further away from $\mu_0$ (larger effect size), the Power climbs toward $1.0$ (100\% certainty of detection).
+ \item A steeper curve means a highly sensitive test (usually due to a massive sample size).
+\end{itemize}
+
+    \begin{figure}[H] 
+        \centering\includegraphics[scale=0.75]{139.Power of the test on the mean and alternative hypothesis.jpg}
+        \caption{Power of the test on the mean and alternative hypothesis}
+        \captionsetup{font=footnotesize}
+    \end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

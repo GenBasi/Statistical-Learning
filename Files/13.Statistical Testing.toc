@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Statistical Testing}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Introduction to Statistical Testing}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Key Elements in Statistical Testing}{3}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Testing Variable (Test Statistic)}{3}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Decision Rule: Acceptance and Rejection Regions}{4}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Decision Rules and Neyman-Pearson}{4}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}P-value and Decision Rule}{5}{subsubsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.3}Types of Hypotheses}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Testing Hypotheses about the Variance ($\sigma ^2$)}{5}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Probability $\beta $ and the Power of the Test}{6}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}The Power Curve}{7}{subsubsection.1.5.1}%

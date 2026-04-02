@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.20)  26 MAR 2026 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.20)  31 MAR 2026 14:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -981,7 +981,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 181.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<Images/0.png, id=155, 289.08pt x 216.81pt>
+<Images/0.png, id=159, 289.08pt x 216.81pt>
 File: Images/0.png Graphic file (type png)
 <use Images/0.png>
 Package pdftex.def Info: Images/0.png  used on input line 181.
@@ -1023,12 +1023,12 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 [5]
-<Images/139.Unbiased Estimator.jpeg, id=242, 448.67625pt x 291.0875pt>
+<Images/139.Unbiased Estimator.jpeg, id=247, 448.67625pt x 291.0875pt>
 File: Images/139.Unbiased Estimator.jpeg Graphic file (type jpg)
 <use Images/139.Unbiased Estimator.jpeg>
 Package pdftex.def Info: Images/139.Unbiased Estimator.jpeg  used on input line 390.
 (pdftex.def)             Requested size: 157.03903pt x 101.88214pt.
-<Images/140.Efficiency.jpeg, id=244, 334.24875pt x 240.9pt>
+<Images/140.Efficiency.jpeg, id=249, 334.24875pt x 240.9pt>
 File: Images/140.Efficiency.jpeg Graphic file (type jpg)
 <use Images/140.Efficiency.jpeg>
 Package pdftex.def Info: Images/140.Efficiency.jpeg  used on input line 418.
@@ -1036,7 +1036,7 @@ Package pdftex.def Info: Images/140.Efficiency.jpeg  used on input line 418.
 
 
 [6 <./Images/139.Unbiased Estimator.jpeg> <./Images/140.Efficiency.jpeg>]
-<Images/141.UMVE.jpeg, id=254, 373.395pt x 331.2375pt>
+<Images/141.UMVE.jpeg, id=259, 373.395pt x 331.2375pt>
 File: Images/141.UMVE.jpeg Graphic file (type jpg)
 <use Images/141.UMVE.jpeg>
 Package pdftex.def Info: Images/141.UMVE.jpeg  used on input line 439.
@@ -1063,7 +1063,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 [8]
-<Images/142.Consistency.jpeg, id=270, 377.41pt x 315.1775pt>
+<Images/142.Consistency.jpeg, id=275, 377.41pt x 315.1775pt>
 File: Images/142.Consistency.jpeg Graphic file (type jpg)
 <use Images/142.Consistency.jpeg>
 Package pdftex.def Info: Images/142.Consistency.jpeg  used on input line 544.
@@ -1073,7 +1073,7 @@ Package pdftex.def Info: Images/142.Consistency.jpeg  used on input line 544.
 [9 <./Images/142.Consistency.jpeg>]
 
 [10]
-<Images/143.Central Limit Theorem.jpeg, id=289, 377.41pt x 416.55624pt>
+<Images/143.Central Limit Theorem.jpeg, id=294, 377.41pt x 416.55624pt>
 File: Images/143.Central Limit Theorem.jpeg Graphic file (type jpg)
 <use Images/143.Central Limit Theorem.jpeg>
 Package pdftex.def Info: Images/143.Central Limit Theorem.jpeg  used on input line 613.
@@ -1081,47 +1081,76 @@ Package pdftex.def Info: Images/143.Central Limit Theorem.jpeg  used on input li
 
 
 [11 <./Images/143.Central Limit Theorem.jpeg>]
-<Images/145.MLE for Bernoulli Parameter.jpeg, id=296, 430.60875pt x 291.0875pt>
+<Images/145.MLE for Bernoulli Parameter.jpeg, id=301, 430.60875pt x 291.0875pt>
 File: Images/145.MLE for Bernoulli Parameter.jpeg Graphic file (type jpg)
 <use Images/145.MLE for Bernoulli Parameter.jpeg>
-Package pdftex.def Info: Images/145.MLE for Bernoulli Parameter.jpeg  used on input line 644.
+Package pdftex.def Info: Images/145.MLE for Bernoulli Parameter.jpeg  used on input line 670.
 (pdftex.def)             Requested size: 215.30383pt x 145.54338pt.
 
 
 [12 <./Images/145.MLE for Bernoulli Parameter.jpeg>]
-<Images/146.Confidence Interval sampling mean.jpeg, id=305, 497.86pt x 412.54124pt>
+
+[13]
+Overfull \hbox (4.95663pt too wide) in paragraph at lines 827--836
+ [] 
+ []
+
+
+
+[14]
+<Images/146.Confidence Interval sampling mean.jpeg, id=324, 497.86pt x 412.54124pt>
 File: Images/146.Confidence Interval sampling mean.jpeg Graphic file (type jpg)
 <use Images/146.Confidence Interval sampling mean.jpeg>
-Package pdftex.def Info: Images/146.Confidence Interval sampling mean.jpeg  used on input line 668.
-(pdftex.def)             Requested size: 199.14047pt x 165.01357pt.
-<Images/147.Confidence Interval of the popultation variance.jpeg, id=306, 511.9125pt x 271.0125pt>
+Package pdftex.def Info: Images/146.Confidence Interval sampling mean.jpeg  used on input line 870.
+(pdftex.def)             Requested size: 189.18877pt x 156.7673pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 882.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\chi' on input line 882.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 882.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 882.
+
+
+
+[15 <./Images/146.Confidence Interval sampling mean.jpeg>]
+<Images/147.Confidence Interval of the popultation variance.jpeg, id=333, 511.9125pt x 271.0125pt>
 File: Images/147.Confidence Interval of the popultation variance.jpeg Graphic file (type jpg)
 <use Images/147.Confidence Interval of the popultation variance.jpeg>
-Package pdftex.def Info: Images/147.Confidence Interval of the popultation variance.jpeg  used on input line 683.
+Package pdftex.def Info: Images/147.Confidence Interval of the popultation variance.jpeg  used on input line 898.
 (pdftex.def)             Requested size: 204.76137pt x 108.40306pt.
 
 
-[13 <./Images/146.Confidence Interval sampling mean.jpeg> <./Images/147.Confidence Interval of the popultation variance.jpeg>] (./11.Estimations.aux)
+[16 <./Images/147.Confidence Interval of the popultation variance.jpeg>] (./11.Estimations.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `11.Estimations.out' has not changed.
-(rerunfilecheck)             Checksum: 9D56692A64CF9C8E41F5ED8BA9C284B5;6652.
+(rerunfilecheck)             Checksum: B41AF7A27E3D6E69CC55BAA0875411CA;6889.
  ) 
 Here is how much of TeX's memory you used:
- 33684 strings out of 473190
- 680961 string characters out of 5715799
- 1110590 words of memory out of 5000000
- 56228 multiletter control sequences out of 15000+600000
- 656095 words of font info for 103 fonts, out of 8000000 for 9000
+ 33739 strings out of 473190
+ 681974 string characters out of 5715799
+ 1113590 words of memory out of 5000000
+ 56275 multiletter control sequences out of 15000+600000
+ 660366 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,13n,101p,1567b,655s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on 11.Estimations.pdf (13 pages, 649434 bytes).
+ 98i,13n,101p,1567b,1044s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on 11.Estimations.pdf (16 pages, 684763 bytes).
 PDF statistics:
- 442 PDF objects out of 1000 (max. 8388607)
- 334 compressed objects within 4 object streams
- 76 named destinations out of 1000 (max. 500000)
- 426 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 468 PDF objects out of 1000 (max. 8388607)
+ 355 compressed objects within 4 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 434 words of extra memory for PDF output out of 10000 (max. 10000000)
 

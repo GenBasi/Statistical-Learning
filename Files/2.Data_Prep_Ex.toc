@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Data Preparation Exercise}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Exercise 1 - First Data Audit}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Output of the First Data Audit}{3}{subsubsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.2}Exercise 2 - Detecting and Counting Missing Values}{5}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Output of Missing Value Detection}{6}{subsubsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.3}Exercise 3 - Detecting Inconsistent Categories in the \texttt {city} Column}{6}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Output of Category Consistency Check}{7}{subsubsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.4}Exercise 4 - Cleaning and Standardizing the \texttt {city} Column}{7}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Output of Cleaning}{8}{subsubsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.5}Exercise 5 - Detecting Suspicious Numerical Values and Outliers}{8}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}Output of Outlier Detection}{9}{subsubsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.6}Exercise 6 - Quantifying Outliers with the IQR Method}{9}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Output of IQR Outlier Detection}{10}{subsubsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.7}Exercise 7 - Comparing Mean and Median for a Skewed Variable}{10}{subsection.1.7}%
+\contentsline {subsubsection}{\numberline {1.7.1}Output of Comparing Mean and Median}{11}{subsubsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.8}Exercise 8 \& 9 - Median Imputation and Binary Encoding}{11}{subsection.1.8}%
+\contentsline {subsubsection}{\numberline {1.8.1}Output of Encoding}{12}{subsubsection.1.8.1}%

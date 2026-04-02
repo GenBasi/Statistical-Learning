@@ -1,0 +1,596 @@
+\section{Data Visualization}
+
+\subsection{Introduction to Data Visualization}
+
+Visualization is not merely a final presentation tool, but an integral part of the exploratory and analytical workflow. The core principle states that \textit{"a graph is worth a thousand words"}, highlighting the superior communicative power of visual representations compared to textual matrices.
+
+\vspace{0.2cm}
+\begin{example}{\textbf{London Bike Sharing Visualization}}
+
+Consider a dataset containing hourly measurements of bike rentals in London. To understand patterns, we could:
+\begin{itemize}
+    \item Create a \textbf{Time Series plot} to reveal daily and seasonal patterns.
+    \item Create \textbf{Box plots by hour} to show peak usage at 8 AM and 6 PM (commuting times).
+    \item Create a \textbf{Scatter plot} (temperature vs. rentals) to highlight positive correlations.
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.5]{17.London Bike Sharing.jpeg}
+    \caption{London Bike Sharing}\captionsetup{font=footnotesize}
+\end{figure}
+
+Without visualization, discovering that bike usage strictly follows the $20^\circ\text{C}$ threshold or the clear weekday vs. weekend divide would require parsing thousands of rows of data manually.
+\end{example}
+
+\begin{defbox}{Data Visualization}
+A broad set of methods and techniques to provide graphical representation of data. Advanced data visualization tools have become essential for analyzing massive amounts of data (\textbf{Scale}) and synthesizing information (\textbf{Complexity}) to drive decision-making.
+\end{defbox}
+
+The standard toolkit includes:
+\begin{itemize}
+    \item \textbf{Charts}: Bar charts, Pie charts, Line charts.
+    \item \textbf{Plots}: Scatter plots, Box plots, Histograms.
+    \item \textbf{Graphs}: Network graphs, Tree diagrams.
+    \item \textbf{Maps}: Geographic visualizations, Heatmaps, Choropleths.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Data Journalism}
+
+\textbf{Data Journalism} is the practice of filtering large datasets to create a narrative (a \textit{news story}) tailored for both technical and non-technical audiences. 
+
+\textbf{The Data Journalism Pipeline:}
+$$\text{Data} \xrightarrow{\text{Filter}} \text{Relevant Information} \xrightarrow{\text{Visualize}} \text{Graphic} \xrightarrow{\text{Contextualize}} \text{Story}$$
+
+Effective visual narratives rest on \textbf{four fundamental pillars}:
+\begin{enumerate}
+    \item \textbf{Information}: Accuracy, relevance, and completeness of the data.
+    \item \textbf{Story}: Narrative structure and journalistic value.
+    \item \textbf{Goal}: Clear purpose and defined target audience.
+    \item \textbf{Visual Design}: Aesthetic and functional design choices.
+\end{enumerate}
+
+%==============================================================================
+\subsection{Categorical Data Visualization}
+
+\subsubsection{Pie Chart}
+
+\begin{defbox}{Pie Chart}
+A circular chart divided into sectors (slices), where the angle and area of each sector are proportional to the frequency (or percentage) of that category relative to the whole.
+\begin{equation}
+    \text{Angle}_i = \frac{f_i}{n} \times 360^\circ \quad ; \quad \text{Percentage}_i = \frac{f_i}{n} \times 100\%
+\end{equation}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.38]{20.PieChart_Titanics Survival.jpeg}
+    \caption{Pie Chart - Titanic Survival}\captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+\textbf{Pros \& Cons:}
+\begin{itemize}
+    \item[\checkmark] Excellent for showing the \textbf{composition of a whole} (e.g., market share).
+    \item[\checkmark] Useful for highlighting a specific slice by "exploding" it from the center.
+    \item[$\times$] Fails when there are too many categories (clutter).
+    \item[$\times$] \textbf{Poor Human Perception:} The human brain struggles to accurately compare angles and areas. If precise comparison between categories is needed, a Bar Chart is vastly superior.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Bar Chart}
+
+\begin{defbox}{Bar Chart (Bar Plot)}
+Associates each distinct categorical modality with a rectangular bar whose length is strictly proportional to its absolute or relative frequency.
+\begin{equation}
+    \text{Bar Height}_i = f_i \text{ (absolute)} \quad \text{or} \quad \frac{f_i}{n} \text{ (relative)}
+\end{equation}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.36]{21. BarCharts - Titanic Survival.jpeg}
+    \caption{Bar Charts - Titanic Survival}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textbf{Pros \& Cons:}
+\begin{itemize}
+    \item[\checkmark] \textbf{Precise Comparison:} Humans easily judge differences in length, making bar charts ideal for comparing category sizes.
+    \item[\checkmark] \textbf{Relative vs Absolute:} Using relative frequencies ($f_i/n$) allows fair comparison between datasets of different total sizes ($n$).
+    \item[$\times$] Unsuitable for continuous numerical data (use Histograms instead).
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Compositional Data Visualization (Stacked Bar Chart)}
+
+\begin{defbox}{Compositional Visualization}
+Uses a single bar (or a series of bars) divided into colored segments to show how a total frequency is broken down into its constituent parts (percentages).
+\begin{equation*}
+    \sum_{i=1}^{k} p_i = 100\% \quad \text{(where } p_i \text{ is the proportion of category } i)
+\end{equation*}
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.28]{22.Data Visualization composition.jpeg}
+    \caption{Compositional Data Visualization Chart}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textbf{Key Features:}
+\begin{itemize}
+    \item Highly effective for tracking \textbf{changes in composition over time} or comparing multiple groups side-by-side.
+    \item \textit{Common uses:} Budget allocation across departments, visitor demographics over different months.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Radar Chart (Spider Chart)}
+
+\begin{defbox}{Radar Chart}
+A graphical method for displaying multivariate categorical data. It plots values along separate axes that radiate from a central point, connecting the data points to form a polygon.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.52]{23.Spider Chart.jpeg}
+    \caption{Radar / Spider Chart}\captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+\textbf{Pros \& Cons:}
+\begin{itemize}
+    \item[\checkmark] Compact representation of \textbf{multivariate profiles} (e.g., comparing the skills of two athletes or the performance of two algorithms across 5 different metrics).
+    \item[\checkmark] Patterns and overall "shapes" are immediately recognizable.
+    \item[$\times$] Becomes illegible with more than 8 variables.
+    \item[$\times$] Visual area can be highly misleading depending on the order in which the axes are arranged.
+\end{itemize}
+
+\subsection{Charts for Continuous Variables}
+
+%==============================================================================
+\subsubsection{Histograms}
+
+\begin{defbox}{Histogram}
+A graphical representation of the distribution of a continuous numerical variable. The range of the variable is partitioned into contiguous intervals (bins). The area of each bar is proportional to the frequency of observations falling within that interval.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.48]{52.Histogram example.jpeg}
+    \caption{Histogram example}\captionsetup{font=footnotesize}
+\end{figure}
+
+Unlike bar charts (which display discrete categories), histograms represent continuous data. 
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.35]{53.Bar Chart vs Histogram.jpeg}
+    \caption{Bar Chart vs Histogram}\captionsetup{font=footnotesize}
+\end{figure}
+
+The Y-axis can represent:
+\begin{enumerate}
+    \item \textbf{Absolute Frequency:} Heights sum to $n$.
+    \item \textbf{Relative Frequency (\%):} Heights sum to 100\%.
+    \item \textbf{Relative Density:} Area sums to 1. This is mandatory if bins have different widths, ensuring comparability and laying the foundation for probability density functions. $h_i = \frac{f_i/n}{w}$
+\end{enumerate}
+
+\textbf{What Histograms Reveal (Data Science Focus):}
+\begin{itemize}
+    \item \textbf{Central Tendency \& Spread:} Quick visual check of mean/mode and variance.
+    \item \textbf{Skewness:} Left-skewed (long left tail) or Right-skewed (long right tail).
+    \item \textbf{Multimodality:} The presence of multiple peaks, which usually indicates mixed populations in your dataset.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Box-Plots}
+
+\begin{defbox}{Box-Plot (Box-and-Whisker)}
+A robust graphical summary based on quartiles that simultaneously displays central location, spread, skewness, and outliers without assuming any underlying statistical distribution.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.2]{18.BoxPlot_structure.jpeg}
+    \caption{Box Plot Structure}\captionsetup{font=footnotesize}
+    \label{fig- box plot structure}
+\end{figure}
+
+\textbf{Anatomy of a Box-Plot:}
+\begin{itemize}
+    \item \textbf{The Box:} Spans from $Q_1$ (25th percentile) to $Q_3$ (75th percentile). Its width is the Interquartile Range (IQR), containing the middle 50\% of the data.
+    \item \textbf{The Median Line:} $Q_2$ (50th percentile). Its position inside the box indicates skewness.
+    \item \textbf{The Whiskers:} Extend to the farthest points within $1.5 \times \text{IQR}$ from the box.
+    \item \textbf{Outliers:} Points lying beyond the whiskers. (Crucial for anomaly detection pipelines).
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.5]{19.box plot comparison.jpeg}
+    \caption{Box plot comparison}\captionsetup{font=footnotesize}
+    \label{fig- box plot comparison}
+\end{figure}
+
+\textbf{Pros \& Cons:} Highly compact and robust to outliers, making it perfect for comparing dozens of variables side-by-side. However, it completely hides multimodality (multiple peaks).
+
+%==============================================================================
+\subsubsection{Density Plots}
+
+\begin{defbox}{Density Plot}
+A smoothed, continuous representation of the underlying probability distribution of a dataset. It is generated using Kernel Density Estimation (KDE) to infer the Probability Density Function (PDF) from the sample data.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.3]{20.Density Plot.jpeg}
+    \caption{Density Plot}\captionsetup{font=footnotesize}
+    \label{fig- Density Plot}
+\end{figure}
+
+
+
+\textbf{Kernel Density Estimation (KDE):}
+The plot is built using a kernel function (usually Gaussian) and a bandwidth parameter $h$:
+\begin{equation}
+    \hat{f}(x) = \frac{1}{nh} \sum_{i=1}^{n} K\left(\frac{x - x_i}{h}\right)
+\end{equation}
+\textit{Data Science Note:} The bandwidth $h$ controls the Bias-Variance tradeoff. A small $h$ captures noise (overfitting/jagged curve), while a large $h$ over-smooths the data (underfitting/hiding patterns).
+
+\textbf{Calculating Probabilities:}
+Because the total area under the curve is exactly 1, the area between two points represents the probability of observing a value in that range:
+\begin{equation}
+    P(a \leq X \leq b) = \int_{a}^{b} \hat{f}(x) \, dx
+\end{equation}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.53]{21.Normal Distribution example.jpeg}
+    \caption{Probability from Density Plot}\captionsetup{font=footnotesize}
+\end{figure}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.5]{22.Bimodal_distribution_example.jpeg}
+    \caption{Bimodal distribution example}\captionsetup{font=footnotesize}
+\end{figure}
+
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.53]{23.salary_skewness_distribution.jpeg}
+    \caption{Visual Skewness Detection}\captionsetup{font=footnotesize}
+\end{figure}
+
+%==============================================================================
+\subsubsection{Violin Plots}
+
+\begin{defbox}{Violin Plot}
+A hybrid visualization that combines the statistical summary of a box-plot with the continuous distribution shape of a mirrored density plot. 
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.3]{25.Violin Plot.jpeg}
+    \caption{Violin Plot}\captionsetup{font=footnotesize}
+    \label{fig- Violin Plot}
+\end{figure}
+
+A Violin plot effectively solves the main flaw of the Box-Plot: it shows where the data is actually clustered (multimodality) while still providing the exact quartiles and medians inside its "belly". 
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.43]{26.Violin Plot example.jpeg}
+    \caption{Violin Plot Comparison}\captionsetup{font=footnotesize}
+\end{figure}
+
+%==============================================================================
+
+
+\subsection{Time Series Visualization}
+
+\textbf{Temporal data} (time series) consists of values observed at different instants of time (e.g., hourly, daily, monthly). The defining characteristic of time series data is that the \textbf{order matters}: time creates a natural sequence and dependency structure.
+
+Visualization is crucial for identifying trends, seasonality (repeating cycles), and anomalies in this sequential data.
+
+%==============================================================================
+\subsubsection{Line Plot}
+
+\begin{defbox}{Line Plot}
+The fundamental visualization for time series data. The x-axis represents time, the y-axis represents the measured variable, and the data points are connected by lines to emphasize continuity and sequential trends.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.43]{27.Time Series Visualization (line plot).jpeg}
+    \captionsetup{font=footnotesize}
+    \label{fig- Time Series Visualization (line plot)}
+\end{figure}
+
+\textbf{Data Science Focus: Dual-Axis Line Plots} \\
+Often, you need to compare two time series with entirely different scales or units (e.g., Temperature in $^\circ\text{C}$ vs. Rainfall in mm). A dual-axis plot allows you to overlay them and visually inspect for correlation or inverse relationships before calculating the Pearson correlation coefficient ($r$).
+
+
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.43]{28.Dual Time Series Plot.jpeg}
+    \captionsetup{font=footnotesize}
+    \label{fig- Dual Time Series Plot}
+\end{figure}
+
+\textbf{Best Practices for Line Plots:}
+\begin{itemize}
+    \item \textbf{Scale selection:} Use logarithmic scales for exponential growth patterns (e.g., viral adoption, compounding revenue).
+    \item \textbf{Missing data:} Do not silently connect across large gaps; missing data should be clearly indicated or carefully interpolated.
+    \item \textbf{Context:} Add horizontal reference lines for targets, means, or control limits.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Time Box-Plots}
+
+\begin{defbox}{Time Box-Plot}
+A hybrid visualization that aggregates temporal data into specific recurring periods (e.g., hours of the day, days of the week, months of the year) and displays the distribution of values for each period using side-by-side box-plots.
+\end{defbox}
+
+While a standard line plot shows the exact sequence of events, a Time Box-Plot reveals the \textbf{underlying seasonal distribution and variability}.
+
+
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Hourly Bike Sharing Demand}}
+
+Suppose you have a year of bike-sharing data and want to optimize fleet distribution. A standard line plot of 8,760 hourly data points would just look like random noise. Instead, you group the data by \textit{Hour of the Day} (0 to 23) and create a Time Box-Plot.
+
+\begin{itemize}
+    \item \textbf{Hour 8 (8:00 AM):} Median is 135 bikes. High demand (morning commute).
+    \item \textbf{Hour 12 (12:00 PM):} Median drops to 90 bikes. Demand is low.
+    \item \textbf{Hour 18 (6:00 PM):} Median peaks at 175 bikes. Evening commute is the busiest time.
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.55]{30.Box Plot Time Series.jpeg}
+    \captionsetup{font=footnotesize}
+    \label{fig- Box Plot Time Series}
+\end{figure}
+
+\textbf{Business Implications:}
+The plot immediately dictates operations: move bikes to residential hubs before Hour 8, run maintenance during Hour 12, and ensure commercial hubs are fully stocked before Hour 18. Furthermore, the Box-Plot automatically highlights \textbf{anomalies} (dots outside the whiskers), allowing you to easily spot days where a transit strike or storm caused abnormal bike usage for that specific hour.
+\end{example}
+
+\textbf{Pros \& Cons of Time Box-Plots:}
+\begin{itemize}
+    \item[\checkmark] \textbf{Pattern Recognition:} Makes recurring temporal patterns instantly visible.
+    \item[\checkmark] \textbf{Variability Comparison:} Shows if demand/behavior is consistent (narrow IQR) or highly volatile (wide IQR) at specific times.
+    \item[$\times$] \textbf{Loss of Sequence:} Aggregation destroys the chronological order (you can't tell if an outlier happened in January or November).
+    \item[$\times$] \textbf{Masks Long-Term Trends:} A steady 5-year upward trend in user growth will be masked when aggregating purely by "hour of the day" or "month of the year".
+\end{itemize}
+
+\subsection{Bivariate and Multivariate Data Visualization}
+
+%==============================================================================
+\subsubsection{Scatter Plot}
+
+\begin{defbox}{Scatter Plot}
+A two-dimensional visualization that displays individual data points on a graph, with one continuous variable on the X-axis and another on the Y-axis. It is the fundamental tool for visualizing the relationship, correlation, and patterns between two variables.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.48]{31.Scatter Plot.jpeg}
+    \captionsetup{font=footnotesize}
+    \caption{Scatter Plot}
+\end{figure}
+
+When analyzing a scatter plot in Data Science, evaluate:
+\begin{enumerate}
+    \item \textbf{Direction:} Positive (upward trend) or Negative (downward trend).
+    \item \textbf{Strength:} Strong (points tightly clustered around an imaginary line) or Weak (points widely dispersed).
+    \item \textbf{Linearity:} Linear (follows a straight line) vs. Non-linear (curves, exponential trends).
+    \item \textbf{Anomalies:} Outliers or distinct clusters that suggest sub-populations.
+\end{enumerate}
+
+\textbf{Stratified Scatter Plot:} Incorporates a categorical variable using color-coding (hue) or marker shapes. This allows you to see if a relationship between two continuous variables changes depending on a categorical group (e.g., comparing height vs. weight, stratified by gender).
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.85]{36.Scatter Plot with Stratifing Factor.jpg}
+    \captionsetup{font=footnotesize}
+    \caption{Scatter Plot with Stratifying Factor}
+\end{figure}
+
+%==============================================================================
+\subsubsection{Pair Plot (Scatter Plot Matrix)}
+
+\begin{defbox}{Pair Plot}
+A comprehensive grid visualization for multivariate datasets. The diagonal displays the univariate distribution of each variable (via histograms or density plots), while the off-diagonal cells display bivariate scatter plots for every possible pair of variables.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.9]{33.Pair Plot diagram.jpg}
+    \captionsetup{font=footnotesize}
+    \caption{Pair Plot diagram}
+\end{figure}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{EDA on Fisher's Iris Dataset}}
+
+The Iris dataset contains 150 samples of iris flowers, measuring 4 continuous features (sepal length/width, petal length/width) across 3 categorical species (Setosa, Versicolor, Virginica).
+
+Instead of plotting 6 individual scatter plots, a \textbf{Pair Plot} stratified by species (color-coded) immediately reveals that:
+\begin{itemize}
+    \item \textit{Diagonal:} Petal length has a highly bimodal distribution overall, but when colored by species, we see Setosa is completely isolated with very small petals.
+    \item \textit{Off-diagonal:} The scatter plot of Petal Length vs. Petal Width shows a near-perfect linear relationship, and Setosa is linearly separable from the other two species.
+\end{itemize}
+This single visualization instantly tells a Data Scientist that a simple linear classifier will easily identify the Setosa species.
+\end{example}
+
+%==============================================================================
+\subsubsection{Heat Map}
+
+\begin{defbox}{Heat Map}
+A graphical representation of data in a matrix format, where colors depict the magnitude of values. In Machine Learning, it is most commonly used to visualize the Pearson correlation matrix between all numerical variables.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.95]{37.Heat Map.jpg}
+    \captionsetup{font=footnotesize}
+    \caption{Correlation Heat Map}
+\end{figure}
+
+\textbf{How to Interpret a Correlation Heatmap:}
+\begin{itemize}
+    \item \textbf{Scale:} Ranges from $-1$ (perfect negative correlation, e.g., dark blue) to $+1$ (perfect positive correlation, e.g., dark red). $0$ indicates no linear correlation (e.g., white).
+    \item \textbf{Diagonal:} Always $+1$ (a variable perfectly correlates with itself).
+    \item \textbf{Actionable Insight (Multicollinearity):} If two independent variables (features) show a correlation $> 0.85$, they provide redundant information. In regression tasks, one of them should typically be removed to ensure model stability.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{Bubble Chart}
+
+\begin{defbox}{Bubble Chart}
+An extension of the scatter plot that visualizes three continuous variables in two dimensions. The X and Y axes represent the first two variables, while the area (size) of the bubbles represents the magnitude of the third variable.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.83]{38.Bubble diagram.jpg}
+    \caption{Bubble Chart}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textit{Limitation:} Humans are bad at estimating relative areas. Use bubble charts to show massive differences in the third variable, but avoid them if precise readings are necessary. Overlapping bubbles can also cause severe clutter.
+
+%==============================================================================
+\subsubsection{Mosaic Plot}
+
+\begin{defbox}{Mosaic Plot}
+A graphical display used to visualize contingency tables for two or more categorical variables. The total area represents 100\% of the data, divided into rectangular tiles whose area is strictly proportional to the frequency of that specific category combination.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.8]{39.Mosaic diagram.jpg}
+    \caption{Mosaic Plot}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textbf{Interpretation:}
+If the horizontal lines dividing the tiles perfectly align across columns, the categorical variables are \textbf{independent}. If the heights vary drastically, it strongly indicates \textbf{conditional dependence} (an association between the variables).
+
+%==============================================================================
+\subsubsection{Summary: Choosing the Right Visualization}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3.5cm}|p{4.5cm}|p{6cm}|}
+\hline
+\textbf{Plot Type} & \textbf{Best For...} & \textbf{Key Features} \\
+\hline
+\textbf{Scatter Plot} & 2 Continuous variables & Reveals linear/non-linear correlations and outliers. \\
+\hline
+\textbf{Stratified Scatter} & 2 Continuous + 1 Categorical & Uses color/shape to find group-specific trends. \\
+\hline
+\textbf{Pair Plot} & Multiple Continuous & Matrix of scatter plots + diagonal distributions. \\
+\hline
+\textbf{Heat Map} & Correlation Matrices & Color-coded matrix to detect multicollinearity. \\
+\hline
+\textbf{Bubble Chart} & 3 Continuous variables & Third variable mapped to bubble area. \\
+\hline
+\textbf{Mosaic Plot} & 2+ Categorical variables & Area-proportional tiles showing contingency tables. \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Specialized and Territorial Charts}
+
+%==============================================================================
+\subsubsection{TreeMap}
+
+\begin{defbox}{TreeMap}
+A hierarchical visualization that represents data as nested rectangles. The area of each rectangle is directly proportional to a quantitative value, while the nesting structure displays the data's hierarchy (categories and subcategories).
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.48]{40.TreMap Chart.jpg}
+    \caption{TreeMap chart}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textbf{Key Characteristics for Data Science:}
+\begin{itemize}
+    \item \textbf{Space Efficiency:} Uses 100\% of the available canvas, allowing the simultaneous display of thousands of elements.
+    \item \textbf{Multidimensionality:} Size represents quantity (e.g., total sales), hierarchy represents grouping (e.g., season $\rightarrow$ specific fruit), and color can represent a third metric (e.g., profit margin or YoY growth).
+\end{itemize}
+
+
+%==============================================================================
+\subsubsection{Territorial Series: Cartogram and Cartodiagram}
+
+When dealing with geographic data, standard charts fail to convey spatial correlations. 
+
+\begin{defbox}{Cartogram}
+A map-based visualization where territorial divisions (e.g., regions, states) are colored or shaded to represent the intensity, frequency, or incidence of a specific variable.
+\end{defbox}
+
+\begin{defbox}{Cartodiagram}
+A variant of the cartogram where statistical charts (like bar charts or pie charts) are overlaid directly onto the geographic regions to show internal data composition alongside spatial distribution.
+\end{defbox}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.55]{41.Cartogram and Cartodiagram.jpg}
+    \caption{Cartogram and Cartodiagram}\captionsetup{font=footnotesize}
+\end{figure}
+
+\vspace{0.2cm}
+\begin{example}{COVID-19 Cartogram (Incidence Rate)}
+To accurately visualize the spread of a virus, plotting raw case counts is misleading because highly populated regions will always appear worse. 
+Instead, Data Scientists normalize the data to an \textbf{Incidence Rate} (cases per 100,000 inhabitants):
+$$\text{Incidence} = \frac{\text{New Cases}}{\text{Total Population}} \times 100,000$$
+The map is then colored based on these thresholds (e.g., $<10$ is White, $>30$ is Dark Red), providing a true geographic representation of the risk.
+\end{example}
+
+%==============================================================================
+\subsubsection{Population Pyramid \& Alternative Visualizations}
+
+\begin{defbox}{Population Pyramid}
+A double horizontal bar chart showing the demographic distribution of a population by age group and sex. Typically, males are plotted on the left and females on the right.
+\end{defbox}
+
+The overall shape immediately reveals the demographic trend:
+\begin{itemize}
+    \item \textbf{Expansive (Wide base):} High birth rate, typical of developing countries.
+    \item \textbf{Stationary (Rectangular):} Stable demographic growth.
+    \item \textbf{Constrictive (Narrow base):} Low birth rate and aging population, typical of developed countries.
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.58]{44.Population Pyramid.jpg}
+    \caption{Population Pyramid}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textit{Note on Creative Infographics:} Sometimes standard charts are replaced with "alternative visualizations" (like spiral dots). While these sacrifice quantitative precision, they are highly effective for data journalism to maximize aesthetic impact and public engagement.
+
+%==============================================================================
+\subsection{Visualization Problems: The Scale Issue}
+
+The \textbf{Scale Problem} occurs when a dataset contains values with an extremely high degree of dispersion (e.g., visualizing a \$10 transaction and a \$10,000,000 transaction on the same Y-axis). 
+\begin{itemize}
+    \item If scaled to the maximum value, the small values flatten to zero and become invisible.
+    \item If scaled to the small values, the large values shoot off the chart.
+\end{itemize}
+
+\textbf{Ad-Hoc Solutions:}
+\begin{enumerate}
+    \item \textbf{Axis Breaks:} Inserting a visual symbol (zigzag lines) to skip the "empty" range of the axis.
+    
+
+
+
+    \item \textbf{Dual-Scale Charts:} Using a secondary Y-axis (useful when comparing two variables with different units).
+    \item \textbf{Normalization:} Converting absolute values to percentages or index ratios.
+  
+\end{enumerate}
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.7]{45.Ad hoc solution.jpg}
+    \caption{Managing Scale Issues}\captionsetup{font=footnotesize}
+\end{figure}
+
+
+%==============================================================================
+\subsubsection{Mathematical Change of Scale}
+
+Instead of visual tricks, Data Scientists often apply mathematical transformations to the data to compress wide distributions.
+
+\textbf{Common Transformations:}
+\begin{itemize}
+    \item \textbf{Logarithmic ($y' = \log(y)$):} Heavily compresses large values while expanding differences between small values. Mandatory for exponentially growing data or highly right-skewed distributions.
+    \item \textbf{Square Root ($y' = \sqrt{y}$):} A more moderate compression compared to the log scale. Often used for count data (e.g., Poisson distributions).
+    \item \textbf{Reciprocal ($y' = \frac{1}{y}$):} Inverts the order and heavily compresses large values.
+\end{itemize}
+
+\begin{figure}[H] 
+    \centering\includegraphics[scale=0.6]{46.Change of Scale.jpg}
+    \caption{Change of Scale (Linear vs Logarithmic)}\captionsetup{font=footnotesize}
+\end{figure}
+
+\textbf{Why Log Scales Matter:}
+If a population grows exponentially over 500 years, a linear chart just looks like a sudden vertical spike at the end, hiding all historical nuance. By applying a logarithmic scale, an exponential curve becomes a straight line, making it incredibly easy to visually identify changes in the \textit{rate of growth}.

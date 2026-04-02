@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Confidence Intervals}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Inference for the Difference Between Two Means (A/B Testing)}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}The Distribution of the Difference ($\bar {X}_1 - \bar {X}_2$)}{3}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Confidence Interval for $\mu _1 - \mu _2$}{3}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}Hypothesis Testing: Formalizing the Decision}{4}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}The P-Value (Observed Significance Level)}{5}{subsubsection.1.1.4}%
+\contentsline {section}{\numberline {2}Confidence Intervals}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Inference for the Difference Between Two Means}{6}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Distribution of the Difference Between Two Sample Means}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Confidence Interval for $\mu _1 - \mu _2$}{7}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Hypothesis Test for the Difference Between Two Means}{9}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Observed Significance Level (p-value)}{13}{subsubsection.2.1.4}%

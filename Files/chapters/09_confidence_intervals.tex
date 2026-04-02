@@ -1,0 +1,746 @@
+\section{Confidence Intervals}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inference for the Difference Between Two Means (A/B Testing)}
+
+When comparing two populations, we are often interested in determining whether their means differ significantly. In Data Science, this is the mathematical engine behind \textbf{A/B Testing}. 
+
+This section covers the procedures for comparing two population means when:
+\begin{itemize}
+    \item Both populations are normally distributed (or the sample sizes are large enough, $n > 30$, to invoke the Central Limit Theorem).
+    \item Their population variances ($\sigma_1^2, \sigma_2^2$) are known.
+\end{itemize}
+
+%==============================================================================
+\subsubsection{The Distribution of the Difference ($\bar{X}_1 - \bar{X}_2$)}
+%==============================================================================
+
+To compare two groups, we look at the difference between their sample means: $D = \bar{X}_1 - \bar{X}_2$. Because every sample is random, this difference $D$ is itself a random variable with its own distribution.
+
+\begin{defbox}{Sampling Distribution of $\bar{X}_1 - \bar{X}_2$}
+If $\bar{X}_1$ and $\bar{X}_2$ are the sample means from two independent populations, the random variable representing their difference is normally distributed with:
+
+\begin{itemize}
+    \item \textbf{Expected Value (The Center):}
+    \begin{equation}
+    E(\bar{X}_1 - \bar{X}_2) = \mu_1 - \mu_2
+    \end{equation}
+    \textit{Meaning:} On average, the difference between our samples will equal the true difference between the populations.
+    
+    \vs
+    \item \textbf{Variance (The Spread):}
+    \begin{equation}
+    \sigma^2_{\bar{X}_1 - \bar{X}_2} = \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}
+    \end{equation}
+    \textit{Crucial Insight:} Notice how we \textbf{add} the variances, even though we are subtracting the means. In statistics, combining two uncertain variables always increases the total uncertainty.
+    
+    \vs
+    \item \textbf{Standard Error (SE):}
+    \begin{equation}
+    \sigma_{\bar{X}_1 - \bar{X}_2} = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+    \end{equation}
+\end{itemize}
+\end{defbox}
+
+
+         \begin{figure}[H] 
+        \centering\includegraphics[scale=0.38]{148.Distribution of the random variables.jpeg}
+        \caption{Distribution of the random variables}
+        \captionsetup{font=footnotesize}
+    \end{figure}
+
+\begin{defbox}{Standardized Test Statistic (Z-Score)}
+To make practical use of this, we standardize the difference into a standard normal distribution $N(0,1)$, allowing us to use standard Z-tables:
+\begin{equation}
+Z = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}} \sim N(0,1)
+\end{equation}
+\end{defbox}
+
+%==============================================================================
+\subsubsection{Confidence Interval for $\mu_1 - \mu_2$}
+%==============================================================================
+
+Instead of just getting a single point estimate for the difference, we can build a Confidence Interval to understand the range of plausible true differences.
+
+\begin{defbox}{Confidence Interval for $\mu_1 - \mu_2$ (Known Variances)}
+For a $(1-\alpha)$ confidence level, the confidence interval is:
+\begin{equation}
+(\bar{x}_1 - \bar{x}_2) \pm z_{1-\alpha/2} \cdot \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+\end{equation}
+
+\textbf{Common critical values ($z_{1-\alpha/2}$):}
+\begin{itemize}
+    \item 90\% confidence ($\alpha = 0.10$): $Z = 1.645$
+    \item 95\% confidence ($\alpha = 0.05$): $Z = 1.96$
+    \item 99\% confidence ($\alpha = 0.01$): $Z = 2.576$
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Data Science Application: A/B Testing App Engagement}}
+
+We are running an A/B test on an iOS app. We want to know if a new gamified notification system (Group A) increases the daily active engagement time compared to the standard system (Group B).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Group} & \textbf{Sample Size} & \textbf{Sample Mean} & \textbf{Known Pop. Variance} \\
+\hline
+Group A (Gamified) & $n_1 = 290$ & $\bar{x}_1 = 15.4$ min & $\sigma_1^2 = 10.3$ \\
+Group B (Standard) & $n_2 = 280$ & $\bar{x}_2 = 11.9$ min & $\sigma_2^2 = 7.4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Goal:} Determine the 95\% confidence interval for the true difference in engagement time ($\mu_1 - \mu_2$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Calculate the Standard Error}
+    \[
+    \text{SE} = \sqrt{\frac{10.3}{290} + \frac{7.4}{280}} = \sqrt{0.0355 + 0.0264} = \sqrt{0.0619} \approx 0.249 \text{ min}
+    \]
+    
+    \item \texttt{Step 2: Find the Critical Value} \\
+    For 95\% confidence, the $Z$-score is $1.96$.
+    
+    \item \texttt{Step 3: Calculate Point Estimate \& Margin of Error}
+    \[
+    \text{Point Estimate} = 15.4 - 11.9 = 3.5 \text{ min}
+    \]
+    \[
+    \text{Margin of Error} = 1.96 \times 0.249 \approx 0.488 \text{ min}
+    \]
+    
+    \item \texttt{Step 4: State the Confidence Interval}
+    \[
+    \boxed{3.012 < \mu_1 - \mu_2 < 3.988}
+    \]
+\end{itemize}
+\textbf{Interpretation:} We are 95\% confident that the gamified notification system increases daily engagement time by somewhere between 3.01 and 3.99 minutes. Because the entire interval is strictly positive (it does not cross zero), we have solid evidence that the new feature works.
+\end{example}
+
+%==============================================================================
+\subsubsection{Hypothesis Testing: Formalizing the Decision}
+%==============================================================================
+
+Hypothesis testing is the formal framework for making decisions from data. Think of it as a \textit{criminal trial}: the Null Hypothesis ($H_0$) is on trial, assumed innocent (true) until the data provides evidence beyond a reasonable doubt to convict (reject) it.
+
+\begin{defbox}{Hypothesis Test Framework}
+\textbf{The Null Hypothesis ($H_0$):} Always assumes \textit{no difference} or \textit{status quo}.
+\begin{equation}
+H_0: \mu_1 - \mu_2 = 0 
+\end{equation}
+
+\textbf{The Alternative Hypothesis ($H_1$):} What you are trying to prove.
+\begin{itemize}
+    \item \textbf{Left-tailed:} $H_1: \mu_1 - \mu_2 < 0$ (Testing if Group 1 is worse).
+    \item \textbf{Right-tailed:} $H_1: \mu_1 - \mu_2 > 0$ (Testing if Group 1 is better).
+    \item \textbf{Two-tailed:} $H_1: \mu_1 - \mu_2 \neq 0$ (Testing if they are just different).
+\end{itemize}
+
+\textbf{The Test Statistic:} Measures how many Standard Errors our observed difference is away from zero.
+\begin{equation}
+Z_{obs} = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}
+\end{equation}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Applying the Hypothesis Test}}
+
+Using the App Engagement data from the previous example, let's formally test if Group A (Gamified) is strictly greater than Group B (Standard) at a $5\%$ significance level ($\alpha = 0.05$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Set up hypotheses}
+    \[
+    H_0: \mu_1 - \mu_2 = 0 \quad \text{vs} \quad H_1: \mu_1 - \mu_2 > 0 \quad \text{(Right-tailed test)}
+    \]
+    
+    \item \texttt{Step 2: Define Rejection Region} \\
+    For $\alpha = 0.05$ (right-tailed), $Z_{critical} = 1.645$. We will reject $H_0$ if our $Z_{obs} > 1.645$.
+
+    \vs
+    
+    \item \texttt{Step 3: Calculate Test Statistic}
+    \[
+    Z_{obs} = \frac{15.4 - 11.9}{0.249} = \frac{3.5}{0.249} \approx 14.05
+    \]
+    
+    \item \texttt{Step 4: Make a Decision} \\
+    Since $14.05 \gg 1.645$, our test statistic falls massively inside the rejection region. We \textbf{reject the null hypothesis}. The gamified feature definitively increases engagement.
+\end{itemize}
+\end{example}
+
+%==============================================================================
+\subsubsection{The P-Value (Observed Significance Level)}
+%==============================================================================
+
+The modern Data Science standard is to report the \textbf{p-value} rather than just a binary \textit{reject}/\textit{accept} decision based on critical values.
+
+\begin{defbox}{P-value Definition \& Logic}
+The \textbf{p-value} is the probability of obtaining a test statistic at least as extreme as the one you actually observed, \textit{assuming the Null Hypothesis is completely true}.
+
+\vspace{0.2cm}
+If the two app versions were identical in reality ($H_0$ is true), what are the odds of seeing a 3.5-minute difference just by random luck?
+
+\vspace{0.2cm}
+\textbf{Decision Rule:} 
+\[
+\text{Reject } H_0 \text{ if } \text{p-value} < \alpha
+\]
+\end{defbox}
+
+\pagebreak
+
+\textbf{Why P-Values are superior:}
+\begin{enumerate}
+    \item They measure the exact strength of the evidence (e.g., $p = 0.001$ is much stronger evidence against $H_0$ than $p = 0.04$).
+    \item They decouple the math from the business decision. The Data Scientist provides the p-value; the business stakeholders decide what $\alpha$ threshold they are comfortable with.
+\end{enumerate}
+
+\textbf{Standard Interpretation Guidelines:}
+\begin{itemize}
+    \item $p < 0.01$: Very strong evidence against $H_0$.
+    \item $0.01 \leq p < 0.05$: Strong evidence against $H_0$.
+    \item $0.05 \leq p < 0.10$: Moderate/Weak evidence against $H_0$ (often called "marginally significant").
+    \item $p \geq 0.10$: No valid evidence to reject $H_0$.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inference on Two Means: Small Samples and Equal Variances}
+
+In this section, we deal with the comparison of means from two different populations ($\mu_1$ and $\mu_2$). This is a common scenario in Data Science when running controlled experiments with limited data. We specifically look at the case where:
+\begin{itemize}
+    \item The sample sizes are small ($n_1, n_2 < 30$).
+    \item The populations are normally distributed.
+    \item We assume the population variances are unknown but equal ($\sigma_1^2 = \sigma_2^2$).
+\end{itemize}
+
+%==============================================================================
+\subsubsection{The T-Statistic and Pooled Variance ($S_c^2$)}
+%==============================================================================
+
+When we assume the two groups share the same underlying variability ($\sigma_1^2 = \sigma_2^2$), we shouldn't calculate two completely separate variances. Instead, we combine (or \textit{pool}) the data from both groups to get a single, more reliable estimate of this common variance. This is called the \textit{pooled variance estimator} ($S_c^2$).
+
+\begin{defbox}{Pooled Variance and T-Statistic}
+Let $C_1$ and $C_2$ be two independent samples of sizes $n_1$ and $n_2$, with sample variances $S_1^2$ and $S_2^2$.
+
+\begin{itemize}
+    \item \textbf{Pooled Variance ($S_c^2$):}
+    \begin{equation}
+        S_{c}^{2} = \frac{(n_{1}-1)S_{1}^{2} + (n_{2}-1)S_{2}^{2}}{n_{1}+n_{2}-2} 
+    \end{equation} 
+    \textit{Note:} This is essentially a weighted average of the two sample variances, where larger samples get more weight.
+
+    \vs
+    \item \textbf{Test Statistic ($T$):}
+    \begin{equation}
+        T = \frac{(\overline{X}_{1}-\overline{X}_{2}) - (\mu_{1}-\mu_{2})}{S_{c}\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}}
+    \end{equation} 
+    This statistic follows a Student's t-distribution with \textbf{degrees of freedom} $df = n_{1}+n_{2}-2$.
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{The Logic of "Pooling" and Degrees of Freedom}}
+
+\textbf{1. Why not just a simple average?} 
+If Group A has 100 users and Group B has only 5 users, the variance measured in Group A is much more reliable. The formula $S_c^2$ multiplies each variance by its degrees of freedom ($n-1$), ensuring the larger group heavily influences the final pooled estimate.
+
+\vspace{0.2cm}
+\textbf{2. The T-Statistic as a Signal-to-Noise Ratio}
+$$ T = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Observed Difference}}{\text{Standard Error}} $$
+\begin{itemize}
+    \item \textbf{Numerator (Signal):} How different are the two groups in reality?
+    \item \textbf{Denominator (Noise):} How much difference would we expect to see purely by random chance? (This is where $S_c$ comes in).
+\end{itemize}
+If the T-score is very large, the signal is overpowering the noise, indicating a real effect.
+
+\vspace{0.2cm}
+\textbf{3. Why are the Degrees of Freedom $n_1 + n_2 - 2$?}
+You start with $n_1 + n_2$ total independent data points. However, before you can calculate the pooled variance, you must first calculate the mean of Group 1 ($\bar{X}_1$) and the mean of Group 2 ($\bar{X}_2$). Calculating these two means "spends" 2 degrees of freedom.
+\end{example}
+
+%==============================================================================
+\subsubsection{Confidence Interval for $\mu_1 - \mu_2$}
+%==============================================================================
+
+\begin{defbox}{Confidence Interval Formula (Small Samples, Equal Variance)}
+For a $(1-\alpha)$ confidence level, the confidence interval is:
+\begin{equation}
+    (\overline{x}_{1}-\overline{x}_{2}) \pm t_{1-\alpha/2, \, df} \cdot S_{c}\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}
+\end{equation} 
+Where $t_{1-\alpha/2, \, df}$ is the critical value from the t-distribution with $df = n_1+n_2-2$.
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Data Science Application: Algorithm Processing Time}}
+
+You are testing a new data-sorting algorithm (V2) against the legacy algorithm (V1) to see if it reduces server processing time in milliseconds (ms). Because running tests on the production server is expensive, your sample size is small.
+
+\begin{itemize}
+    \item \textbf{Legacy V1:} $n_1 = 15$ runs, $\bar{x}_1 = 65.3$ ms, $s_1^2 = 138.7$
+    \item \textbf{New V2:} $n_2 = 15$ runs, $\bar{x}_2 = 49.5$ ms, $s_2^2 = 124.6$
+\end{itemize}
+
+\textbf{Goal:} Determine the 99\% confidence interval for the true difference in processing time ($\mu_1 - \mu_2$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Calculate the Pooled Variance}
+    $$ s_{c}^{2} = \frac{(15-1)138.7 + (15-1)124.6}{15 + 15 - 2} = \frac{1941.8 + 1744.4}{28} = 131.65 $$
+    
+    \item \texttt{Step 2: Find the Critical T-Value} \\
+    For 99\% confidence ($\alpha=0.01$, two-tailed) and $df = 28$, the t-table gives $t \approx 2.763$.
+    
+    \item \texttt{Step 3: Calculate the Confidence Limits}
+    $$ \text{Margin of Error} = 2.763 \cdot \sqrt{131.65 \left(\frac{1}{15} + \frac{1}{15}\right)} \approx 2.763 \cdot 4.19 \approx 11.58 \text{ ms} $$
+    $$ \text{Point Estimate} = 65.3 - 49.5 = 15.8 \text{ ms} $$
+    
+    \item \texttt{Step 4: State the Confidence Interval}
+    $$ 15.8 \pm 11.58 \implies \boxed{4.22 < \mu_1 - \mu_2 < 27.38} $$
+\end{itemize}
+
+\textbf{Interpretation (The Rule of Zero):}
+We are 99\% confident that the Legacy algorithm (V1) takes between 4.22 ms and 27.38 ms \textit{longer} to run than the New algorithm (V2). Because the interval is strictly positive and \textbf{does not contain zero}, we can definitively state that the new algorithm is significantly faster.
+\end{example}
+
+%==============================================================================
+\subsubsection{Hypothesis Testing}
+%==============================================================================
+
+We can formalize the decision from the previous example using a Hypothesis Test.
+
+\begin{defbox}{Hypothesis Test Regions (T-Test)}
+\textbf{Test Statistic:} 
+\begin{equation}
+t_{obs} = \frac{\overline{x}_{1}-\overline{x}_{2}}{s_{c}\sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}}
+\end{equation}
+
+\textbf{Decision Rules (Rejection Regions) for significance level $\alpha$:}
+\begin{itemize}
+    \item \textbf{Left-Tailed} ($H_1: \mu_1 < \mu_2$): Reject $H_0$ if $t_{obs} < -t_{1-\alpha}$
+    \item \textbf{Right-Tailed} ($H_1: \mu_1 > \mu_2$): Reject $H_0$ if $t_{obs} > t_{1-\alpha}$
+    \item \textbf{Two-Tailed} ($H_1: \mu_1 \neq \mu_2$): Reject $H_0$ if $|t_{obs}| > t_{1-\alpha/2}$
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Formal Hypothesis Test on Algorithm Speed}}
+
+Using the same data, formally test if the New V2 algorithm ($\mu_2$) is significantly \textbf{faster} (i.e., has a lower processing time) than the Legacy V1 algorithm ($\mu_1$) at a 1\% significance level ($\alpha=0.01$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Set up Hypotheses} \\
+    We want to prove V1 takes longer than V2.
+    $$ H_0: \mu_1 - \mu_2 = 0 \quad \text{vs} \quad H_1: \mu_1 - \mu_2 > 0 \quad \text{(Right-Tailed Test)} $$
+    
+    \item \texttt{Step 2: Find Critical Value \& Rejection Region} \\
+    For a right-tailed test with $df=28$ and $\alpha=0.01$, the critical t-value is $2.467$. \\
+    We will reject $H_0$ if $t_{obs} > 2.467$.
+    
+    \item \texttt{Step 3: Calculate the Test Statistic} \\
+    We already know $s_c = \sqrt{131.65} \approx 11.47$.
+    $$ t_{obs} = \frac{65.3 - 49.5}{11.47 \cdot \sqrt{2/15}} = \frac{15.8}{4.19} \approx 3.77 $$
+    
+    \item \texttt{Step 4: Conclusion} \\
+    Since $3.77 > 2.467$, our test statistic falls deep into the rejection region. We reject the null hypothesis. There is strong statistical evidence that the new algorithm V2 is faster.
+\end{itemize}
+\end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inference on Difference of Two Means: Large Samples}
+
+When dealing with large samples (typically $n_1 \ge 30$ and $n_2 \ge 30$), the statistical approach simplifies dramatically thanks to the \textbf{Central Limit Theorem (CLT)}. We no longer need to assume that the underlying populations are normally distributed, nor do we need to worry about whether their variances are equal.
+
+In this scenario, because our sample sizes are large enough to be highly reliable, we use the \textbf{Z-statistic} (Standard Normal Distribution) instead of the T-Student distribution.
+
+%==============================================================================
+\subsubsection{Confidence Interval and Test Statistic}
+%==============================================================================
+
+For large samples, the sample variances ($S_1^2$ and $S_2^2$) are excellent estimates of the true population variances ($\sigma_1^2$ and $\sigma_2^2$). Therefore, we can plug them directly into our formulas without complex pooling.
+
+\begin{defbox}{Z-Statistic and Standard Error for Two Means}
+\textbf{Assumption:} Independent samples with large sample sizes ($n_1, n_2 \ge 30$).
+
+\begin{itemize}
+    \item \textbf{Standard Error ($SE$):}
+    \begin{equation}
+        SE = \hat{\sigma}_{\overline{X}_1 - \overline{X}_2} = \sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}
+    \end{equation} 
+    \item \textbf{Test Statistic ($Z$):}
+    \begin{equation}
+        Z = \frac{(\overline{X}_1 - \overline{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}} \approx N(0,1) 
+    \end{equation}
+\end{itemize}
+\end{defbox}
+
+\begin{defbox}{Confidence Interval (Large Samples)}
+The $(1-\alpha)$ Confidence Interval for the true difference $\mu_1 - \mu_2$ is:
+\begin{equation}
+    (\overline{X}_1 - \overline{X}_2) \pm Z_{1-\alpha/2} \cdot \sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}} 
+\end{equation} 
+Where $Z_{1-\alpha/2}$ is the critical value from the standard normal distribution (e.g., $1.96$ for 95\%, $1.645$ for 90\%).
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Why Large Samples are Easier (Data Science Perspective)}}
+
+When working with Big Data, statistical inference becomes much simpler:
+
+\begin{itemize}
+    \item \textbf{No More "Pooling":} With small samples, we had to combine variances ($S_c^2$) to guess the background noise. With large samples, $S_1^2$ and $S_2^2$ are so precise that we treat them as absolute truth. We simply add their standard errors together using the Pythagorean theorem: $SE = \sqrt{\text{Error}_1^2 + \text{Error}_2^2}$.
+    \item \textbf{The Shift from T to Z:} The T-distribution has "fat tails" to protect you from the uncertainty of small samples. Because a large sample removes that uncertainty, we switch to the sharper, more precise \textbf{Standard Normal Distribution (Z)}.
+    \item \textbf{Distribution Agnostic:} Thanks to the CLT, it doesn't matter if your users' session times are heavily skewed or exponential. The difference of their means will always form a perfect Gaussian bell curve.
+\end{itemize}
+\end{example}
+
+%==============================================================================
+\subsubsection{Practical Application}
+%==============================================================================
+
+\begin{example}{\textbf{Database Query Latency Optimization}}
+
+\textbf{Problem:} You rewrote a complex SQL query to improve database performance. You want to compare the execution latency (in milliseconds) between the "Old Query" and the "New Query". 
+
+Construct a \textbf{90\% Confidence Interval} to estimate the true difference in execution time.
+
+\begin{itemize}
+    \item \texttt{Step 1: Extract Data} 
+    \begin{itemize}
+        \item \textbf{Group 1 (Old Query):} $n_1 = 159$, $\quad \overline{x}_1 = 91.2$ ms, $\quad S_1^2 = 82.5$
+        \item \textbf{Group 2 (New Query):} $n_2 = 79$, $\quad \overline{x}_2 = 81.4$ ms, $\quad S_2^2 = 68.7$
+    \end{itemize}
+
+    \item \texttt{Step 2: Determine Critical Value}
+    \begin{itemize}
+        \item For a 90\% confidence level ($1-\alpha = 0.90$), the tails are $\alpha/2 = 0.05$.
+        \item The Z-score from the standard normal table is $Z_{0.95} = 1.645$.
+    \end{itemize}
+
+    \item \texttt{Step 3: Calculate the Interval}
+    \begin{itemize}
+        \item Difference in means: $91.2 - 81.4 = 9.8$ ms.
+        \item Standard Error:
+        $$ SE = \sqrt{\frac{82.5}{159} + \frac{68.7}{79}} = \sqrt{0.518 + 0.869} = \sqrt{1.387} \approx 1.178 \text{ ms} $$
+        \item Margin of Error: $1.645 \times 1.178 \approx 1.94$ ms.
+        \item Lower Limit: $9.8 - 1.94 = 7.86$ ms.
+        \item Upper Limit: $9.8 + 1.94 = 11.74$ ms.
+    \end{itemize}
+
+    \item \texttt{Step 4: Conclusion} 
+    
+    The 90\% Confidence Interval is $\boxed{(7.86, 11.74)}$. 
+    Because the entire interval is positive and does not contain $0$, we can confidently state that the Old Query takes between $7.86$ and $11.74$ milliseconds longer to run than the New Query. The optimization was a success.
+\end{itemize}
+\end{example}
+
+\vspace{0.2cm}
+
+Using the exact same data, we can formalize this finding with a Hypothesis Test.
+
+\begin{example}{\textbf{Hypothesis Test on Query Latency}}
+
+\textbf{Goal:} Determine if the average execution time of the New Query ($\mu_2$) is \textbf{significantly lower} than the Old Query ($\mu_1$) at a 5\% significance level ($\alpha = 0.05$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Set Hypotheses} 
+    
+    We want to prove $\mu_2 < \mu_1$, which mathematically means $\mu_1 - \mu_2 > 0$.
+    $$ H_0: \mu_1 - \mu_2 = 0 $$
+    $$ H_1: \mu_1 - \mu_2 > 0 \quad (\text{Right-tailed test}) $$
+
+    \item \texttt{Step 2: Rejection Region} 
+    \begin{itemize}
+        \item Significance level $\alpha = 0.05$.
+        \item Critical value $Z_{0.95} = 1.645$.
+        \item We will reject $H_0$ if $Z_{obs} > 1.645$.
+    \end{itemize}
+
+    \item \texttt{Step 3: Calculate Test Statistic} 
+    $$ Z_{obs} = \frac{(\overline{X}_1 - \overline{X}_2) - 0}{SE} = \frac{91.2 - 81.4}{\sqrt{\frac{82.5}{159} + \frac{68.7}{79}}} = \frac{9.8}{1.178} \approx 8.32 $$
+
+    \item \texttt{Step 4: Conclusion} 
+    
+    Since $Z_{obs} = 8.32$ is massively greater than the threshold of $1.645$, it falls deep into the rejection region. We \textbf{reject the null hypothesis}. There is overwhelming statistical evidence that the New Query is significantly faster.
+\end{itemize}
+\end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inference for the Difference of Two Proportions (Large Samples)}
+
+In this section, we extend the concepts of inference to categorical (binary) data. Specifically, we compare the proportions of "\textit{successes}" in two independent populations ($p_1$ and $p_2$). In Data Science, this is the mathematical foundation for evaluating \textbf{Conversion Rates} or \textbf{Click-Through Rates (CTR)} in A/B testing.
+
+Because we are dealing with large samples (e.g., thousands of website visitors), we rely on the Central Limit Theorem to approximate the sampling distribution as a Normal distribution.
+
+%==============================================================================
+\subsubsection{Distribution of the Difference $\hat{p}_1 - \hat{p}_2$}
+%==============================================================================
+
+Let $p_1$ and $p_2$ be the true, unknown population proportions. We estimate them using the sample proportions $\hat{p}_1$ and $\hat{p}_2$. 
+
+\begin{defbox}{Sampling Distribution of the Difference}
+Given two independent samples of size $n_1$ and $n_2$:
+
+\begin{itemize}
+    \item \textbf{Estimators:}
+    $$ \hat{p}_1 = \frac{x_1}{n_1}, \quad \hat{p}_2 = \frac{x_2}{n_2} $$
+    \textit{(Where $x_1$ and $x_2$ are the number of observed successes).}
+
+    \vs
+    \item \textbf{Variance of the Difference:}
+    \begin{equation}
+        \sigma_{\hat{p}_{1}-\hat{p}_{2}}^{2} = \frac{p_{1}(1-p_{1})}{n_{1}} + \frac{p_{2}(1-p_{2})}{n_{2}}
+    \end{equation}  
+
+    \vs
+    \item \textbf{Standardized Statistic ($Z$):}
+    Since the true $p_1$ and $p_2$ are unknown, we plug in our sample estimates ($\hat{p}_1, \hat{p}_2$) to calculate the Standard Error. The resulting variable follows a Standard Normal distribution $N(0,1)$:
+    \begin{equation}
+        Z = \frac{(\hat{p}_{1}-\hat{p}_{2})-(p_{1}-p_{2})}{\sqrt{\frac{\hat{p}_{1}(1-\hat{p}_{1})}{n_{1}}+\frac{\hat{p}_{2}(1-\hat{p}_{2})}{n_{2}}}} 
+    \end{equation} 
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Why the Variance Formula Looks Different}}
+
+We are moving from comparing \textit{averages} (quantitative data) to comparing \textit{percentages} (categorical Success/Failure data).
+
+For a binary variable (Bernoulli distribution), the variance is entirely dictated by the proportion itself: $\text{Var} = p(1-p)$. 
+\begin{itemize}
+    \item If $p = 0.99$, the variance is tiny (almost everyone succeeds, highly predictable).
+    \item If $p = 0.50$, the variance is at its absolute maximum (pure coin flip, total unpredictability).
+\end{itemize}
+Because the two samples are independent, the total variance of their difference is simply the sum of their individual variances.
+\end{example}
+
+%==============================================================================
+\subsubsection{Confidence Interval for $p_1 - p_2$}
+%==============================================================================
+
+\begin{defbox}{Confidence Interval Formula for Proportions}
+The $(1-\alpha)$ confidence interval for the true difference $p_1 - p_2$ is:
+\begin{equation}
+    (\hat{p}_{1}-\hat{p}_{2}) \pm z_{1-\alpha/2} \cdot \sqrt{\frac{\hat{p}_{1}(1-\hat{p}_{1})}{n_{1}}+\frac{\hat{p}_{2}(1-\hat{p}_{2})}{n_{2}}} 
+\end{equation}
+Where $z_{1-\alpha/2}$ is the critical value from the Standard Normal distribution (e.g., $1.96$ for 95\% confidence).
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Data Science Application: A/B Testing a Checkout Button}}
+
+\textbf{Goal:} Calculate the 95\% Confidence Interval to see if a red "Buy Now" button ($p_1$) yields a different Click-Through Rate than a blue button ($p_2$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Extract Data} 
+    \begin{itemize}
+        \item \textbf{Red Button (Group 1):} $x_1 = 127$ clicks out of $n_1 = 810$ visitors.
+        \item \textbf{Blue Button (Group 2):} $x_2 = 235$ clicks out of $n_2 = 1385$ visitors.
+    \end{itemize}
+    
+    \item \texttt{Step 2: Calculate Sample Proportions} 
+    $$ \hat{p}_1 (\text{Red}) = \frac{127}{810} \approx 0.157 \quad (15.7\%) $$
+    $$ \hat{p}_2 (\text{Blue}) = \frac{235}{1385} \approx 0.170 \quad (17.0\%) $$
+    $$ \text{Difference} (\hat{p}_1 - \hat{p}_2) = 0.157 - 0.170 = -0.013 \quad (-1.3\%) $$
+
+    \item \texttt{Step 3: Determine Critical Value} \\
+    For 95\% confidence ($\alpha = 0.05$), the Z-score is $z_{0.975} = 1.96$.
+
+    \item \texttt{Step 4: Calculate Standard Error (SE)} 
+    $$ SE = \sqrt{\frac{0.157(1-0.157)}{810} + \frac{0.170(1-0.170)}{1385}} = \sqrt{\frac{0.132}{810} + \frac{0.141}{1385}} \approx 0.016 $$
+ 
+    \item \texttt{Step 5: Calculate Interval Limits} 
+    $$ \text{Lower Limit } (I_1) = -0.013 - (1.96 \times 0.016) = -0.044 $$
+    $$ \text{Upper Limit } (I_2) = -0.013 + (1.96 \times 0.016) = 0.018 $$
+    
+    \item \texttt{Step 6: Conclusion} \\
+    The 95\% Confidence Interval is $\boxed{(-0.044, 0.018)}$. Because this interval spans from negative to positive (meaning it \textbf{contains zero}), we cannot definitively say which button is better. The $1.3\%$ observed difference is likely just random noise.
+\end{itemize}
+\end{example}
+
+%==============================================================================
+\subsubsection{Hypothesis Test for Difference of Two Proportions}
+%==============================================================================
+
+When performing a formal Hypothesis Test, we start by assuming the Null Hypothesis is true ($H_0: p_1 = p_2$). If the two groups truly have the exact same conversion rate, they effectively belong to the same overarching population. 
+
+Therefore, instead of calculating two separate variances, we combine all successes and all visitors into one massive pool to calculate a \textbf{Pooled Sample Proportion ($\hat{p}_c$)}. This provides a much more stable and accurate estimate of the background noise.
+
+\begin{defbox}{Hypothesis Test for Two Proportions (Pooled Estimate)}
+\textbf{Null Hypothesis:} $H_0: p_1 - p_2 = 0$
+
+\begin{itemize}
+    \item \textbf{Pooled Sample Proportion ($\hat{p}_c$):}
+    \begin{equation}
+        \hat{p}_{c} = \frac{\text{Total Successes}}{\text{Total Trials}} = \frac{x_1 + x_2}{n_1 + n_2} 
+    \end{equation}
+
+    \item \textbf{Test Statistic ($Z_{obs}$):}
+    \begin{equation}
+        Z_{obs} = \frac{\hat{p}_{1}-\hat{p}_{2}}{\sqrt{\hat{p}_{c}(1-\hat{p}_{c})\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}} 
+    \end{equation} 
+
+    \item \textbf{Rejection Regions (for significance level $\alpha$):}
+    \begin{itemize}
+        \item $H_1: p_1 < p_2 \implies \text{Reject if } Z_{obs} < -z_{1-\alpha}$
+        \item $H_1: p_1 > p_2 \implies \text{Reject if } Z_{obs} > z_{1-\alpha}$
+        \item $H_1: p_1 \neq p_2 \implies \text{Reject if } |Z_{obs}| > z_{1-\alpha/2}$
+    \end{itemize}
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Formal Hypothesis Test on the Checkout Button}}
+
+Using the same data, formally test if the Red Button ($p_1$) and the Blue Button ($p_2$) have different Click-Through Rates at a 5\% significance level ($\alpha = 0.05$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Hypotheses} 
+    $$ H_0: p_1 = p_2 \quad \text{(No difference)} $$
+    $$ H_1: p_1 \neq p_2 \quad \text{(Two-tailed test: A difference exists)} $$
+
+    \item \texttt{Step 2: Calculate Pooled Proportion ($\hat{p}_c$)} 
+    \begin{itemize}
+        \item Total clicks = $127 + 235 = 362$.
+        \item Total visitors = $810 + 1385 = 2195$.
+    \end{itemize}
+    $$ \hat{p}_c = \frac{362}{2195} \approx 0.165 \quad (16.5\%) $$
+    
+    \item \texttt{Step 3: Calculate Test Statistic ($Z_{obs}$)} 
+    \begin{itemize}
+        \item Numerator (Observed Difference): $\hat{p}_1 - \hat{p}_2 = 0.157 - 0.170 = -0.013$.
+        \item Denominator (Standard Error under $H_0$):
+        $$ SE_{H_0} = \sqrt{0.165(1-0.165)\left(\frac{1}{810} + \frac{1}{1385}\right)} \approx 0.0164 $$
+    \end{itemize}
+    $$ Z_{obs} = \frac{-0.013}{0.0164} \approx -0.792 $$
+    
+    \item \texttt{Step 4: Conclusion} \\
+    The critical values for a two-tailed test at $\alpha=0.05$ are $\pm 1.96$. \\
+    Since $-1.96 < -0.792 < 1.96$, our Z-statistic falls comfortably in the "Do Not Reject" region. \\
+    We \textbf{fail to reject $H_0$}. The data confirms there is no statistically significant difference in CTR between the Red and Blue buttons.
+\end{itemize}
+\end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inference on the Ratio of Two Variances -- Fisher's F Distribution}
+
+In many Data Science applications (e.g., Quality Control, assessing algorithm stability, measuring financial risk), we are interested not just in the averages, but in the \textbf{variability} of two populations. 
+
+To compare two population variances $\sigma_1^2$ and $\sigma_2^2$, we do not subtract them; we look at their \textbf{ratio}. This mathematical operation requires a new probability distribution called \textbf{Fisher's F Distribution}.
+
+%==============================================================================
+\subsubsection{Definition and Properties of the F Distribution}
+%==============================================================================
+
+The F-distribution arises naturally when we take the ratio of two independent Chi-squared random variables, each divided by its respective degrees of freedom.
+
+\begin{defbox}{Fisher's F Distribution}
+Let $X_1$ and $X_2$ be two independent random variables following Chi-squared ($\chi^2$) distributions with $r_1$ and $r_2$ degrees of freedom, respectively.
+
+\begin{itemize}
+    \item The random variable defined by their ratio:
+    \begin{equation}
+        Y = \frac{X_1 / r_1}{X_2 / r_2} 
+    \end{equation} 
+    follows a \textbf{Fisher's F distribution} with parameters $(r_1, r_2)$ degrees of freedom.
+\end{itemize}
+\end{defbox}
+
+\vspace{0.2cm}
+\textbf{Key Properties of the F-Curve:}
+\begin{itemize}
+    \item \textbf{Domain ($F \ge 0$):} Since variances are always positive, the F-ratio cannot be negative. The curve starts at exactly zero.
+    \item \textbf{Shape (Right-Skewed):} It is not a symmetric bell curve. It has a high peak on the left and a long tail extending to the right.
+    \item \textbf{Parameters:} Its exact shape depends on \textbf{two} parameters: the degrees of freedom of the numerator ($r_1$) and the denominator ($r_2$).
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{The Intuitive Logic of the Variance Ratio}}
+
+Unlike means, where we calculate the difference ($A - B$) and check if it is close to $0$, for variances we calculate the \textbf{ratio} ($A / B$) and check if it is close to \textbf{1}.
+
+$$ F = \frac{\text{Variance of Group 1}}{\text{Variance of Group 2}} = \frac{S_1^2}{S_2^2} $$
+
+\begin{itemize}
+    \item If $F \approx 1$: The variances are roughly equal (Both groups have equal stability).
+    \item If $F > 1$: Group 1 has a larger variance (Group 1 is more chaotic / less precise).
+    \item If $F < 1$: Group 1 has a smaller variance (Group 1 is more stable / highly precise).
+\end{itemize}
+\end{example}
+
+%==============================================================================
+\subsubsection{F-Test for Equality of Two Variances}
+%==============================================================================
+
+We use this formal Hypothesis Test to verify if two normal populations have the exact same underlying variance ($H_0: \sigma_1^2 = \sigma_2^2$). 
+
+\begin{defbox}{Hypothesis Test for Two Variances}
+\textbf{Assumptions:} Two independent samples $C_1, C_2$ drawn from normally distributed populations $P_1, P_2$.
+
+\begin{itemize}
+    \item \textbf{Test Statistic:}
+    \begin{equation}
+        F_{obs} = \frac{S_1^2}{S_2^2}
+    \end{equation}
+    This statistic follows an F distribution with $df_1 = n_1 - 1$ (numerator) and $df_2 = n_2 - 1$ (denominator).
+\end{itemize}
+
+\vs
+\begin{itemize}
+    \item \textbf{Rejection Regions (for significance level $\alpha$):}
+    \begin{itemize}
+        \item \textbf{Left-tailed ($H_1: \sigma_1^2 < \sigma_2^2$):} Reject $H_0$ if $F_{obs} < f_{\alpha}$
+        \item \textbf{Right-tailed ($H_1: \sigma_1^2 > \sigma_2^2$):} Reject $H_0$ if $F_{obs} > f_{1-\alpha}$
+        \item \textbf{Two-tailed ($H_1: \sigma_1^2 \neq \sigma_2^2$):} Reject $H_0$ if $F_{obs} < f_{\alpha/2}$ OR $F_{obs} > f_{1-\alpha/2}$
+    \end{itemize}
+\end{itemize}
+\textit{Note: $f_{\alpha}$ represents the critical quantile from the F-distribution table.}
+\end{defbox}
+
+\vspace{0.2cm}
+\begin{example}{\textbf{Data Science Application: Testing Machine Precision}}
+
+\textbf{Goal:} You are managing a manufacturing pipeline. You want to compare two packaging machines to verify if Machine A has \textbf{higher variability} (is less precise and more prone to errors) than Machine B at a 5\% significance level ($\alpha = 0.05$).
+
+\begin{itemize}
+    \item \texttt{Step 1: Extract Data} 
+    \begin{itemize}
+        \item \textbf{Machine A:} $n_1 = 31$ packages, standard deviation $S_1 = 7.08$ grams.
+        \item \textbf{Machine B:} $n_2 = 28$ packages, standard deviation $S_2 = 4.31$ grams.
+    \end{itemize}
+
+    \item \texttt{Step 2: Formulate Hypotheses} \\
+    We want to prove that Machine A's variance is strictly greater than Machine B's.
+    $$ H_0: \sigma_1^2 = \sigma_2^2 \quad (\text{Equal precision}) $$
+    $$ H_1: \sigma_1^2 > \sigma_2^2 \quad (\text{Machine A is more chaotic}) $$ 
+    \textit{This is a Right-Tailed test.}
+
+    \item \texttt{Step 3: Calculate Test Statistic ($F_{obs}$)} \\
+    We compare the ratio of the sample variances ($S^2$).
+    $$ F_{obs} = \frac{S_1^2}{S_2^2} = \frac{7.08^2}{4.31^2} = \frac{50.126}{18.576} \approx 2.698 $$ 
+
+    \item \texttt{Step 4: Determine Critical Value} 
+    \begin{itemize}
+        \item Degrees of freedom: $df_1 = 31 - 1 = 30$ and $df_2 = 28 - 1 = 27$.
+        \item Threshold for $\alpha = 0.05$ (from the F-table):
+        $$ f_{0.95}(30, 27) = 1.884 $$ 
+    \end{itemize}
+
+    \item \texttt{Step 5: Conclusion} \\
+    Compare the calculated test statistic with the critical threshold:
+    $$ 2.698 > 1.884 $$ 
+    Because $F_{obs}$ is greater than our critical value, it falls in the \textbf{Rejection Region}. We \textbf{reject $H_0$}. 
+    
+    \textbf{Final Verdict:} There is strong statistical evidence to conclude that Machine A has significantly higher variability (lower precision) than Machine B.
+\end{itemize}
+\end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak

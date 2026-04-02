@@ -1,0 +1,41 @@
+customer_id,age,income,city,property_type,churn,promo_used,quantity,purchase_amount,review
+1,56,27806.0,naples,Penthouse,Yes,No,3,140.38,amazing garden and view
+2,121,32018.0,MILAN,Villa,Yes,Yes,2,32.26,very good location
+3,48,37404.0,Naples,Penthouse,Yes,No,2,111.42,small but useful apartment
+4,42,,Rome,Villa,Yes,Yes,2,47.34,very noisy street at night
+5,42,33114.0,milano,Villa,No,Yes,3,43.67,amazing garden and view
+6,55,33389.0,ROMA,Penthouse,No,No,2,0.01,great value and friendly staff
+7,35,18943.0,milano,Villa,Yes,Yes,2,5.58,luxury penthouse with terrace
+8,48,28251.0,milano,Apartment,Yes,No,1,173.62,very good location
+9,16,36818.0,milano,Villa,No,No,99999,86.89,bad experience with delivery
+10,21,45157.0,rome,Apartment,Yes,No,5,103.53,excellent service and clean room
+11,46,30380.0,Napoli,Villa,No,No,3,82.36,average quality for the price
+12,15,15772.0,Rome,Penthouse,Yes,Yes,3,232.38,small but useful apartment
+13,39,27278.0,ROMA,Apartment,Yes,No,5,131.87,great value and friendly staff
+14,37,,Milan,Apartment,Yes,Yes,2,104.53,excellent service and clean room
+15,18,999999.0,MILAN,Apartment,No,Yes,99999,179.65,average quality for the price
+16,31,14842.0,ROMA,Villa,Yes,Yes,2,204.98,very noisy street at night
+17,31,23991.0,ROMA,Penthouse,No,No,1,67.5,very good location
+18,32,21380.0,MILAN,Apartment,No,Yes,5,105.87,luxury penthouse with terrace
+19,37,44944.0,MILAN,Penthouse,No,Yes,5,109.36,amazing garden and view
+20,39,38615.0,Rome,Apartment,No,No,2,31.1,small but useful apartment
+21,43,40049.0,ROMA,Villa,No,No,3,73.82,very noisy street at night
+22,33,26683.0,Naples,Villa,No,Yes,2,184.84,average quality for the price
+23,54,38024.0,Napoli,Villa,No,Yes,3,153.83,average quality for the price
+24,35,,Napoli,Apartment,Yes,Yes,1,117.21,bad experience with delivery
+25,63,39821.0,ROMA,Apartment,Yes,Yes,99999,96.4,excellent service and clean room
+26,25,35369.0,Rome,Apartment,Yes,No,3,47.84,luxury penthouse with terrace
+27,41,26874.0,ROMA,Villa,No,Yes,5,127.84,very good location
+28,56,27876.0,Napoli,Apartment,Yes,No,2,134.99,very good location
+29,48,37092.0,naples,Penthouse,Yes,Yes,1,0.01,excellent service and clean room
+30,36,28138.0,naples,Villa,No,Yes,2,207.38,great value and friendly staff
+31,31,24386.0,MILAN,Villa,Yes,No,3,126.53,very noisy street at night
+32,35,39031.0,Rome,Penthouse,No,Yes,3,138.11,luxury penthouse with terrace
+33,47,34552.0,Rome,Penthouse,Yes,No,2,101.89,amazing garden and view
+34,29,33887.0,ROMA,Villa,Yes,No,1,28.38,very good location
+35,37,19971.0,Milan,Villa,No,Yes,1,138.67,amazing garden and view
+36,27,36465.0,Naples,Apartment,No,Yes,2,63.9,small but useful apartment
+37,21,27365.0,milano,Penthouse,No,Yes,2,78.83,bad experience with delivery
+38,32,999999.0,rome,Apartment,Yes,Yes,3,30.32,very good location
+39,33,38275.0,rome,Penthouse,Yes,Yes,4,205.72,excellent service and clean room
+40,17,38828.0,rome,Penthouse,No,Yes,4,169.03,bad experience with delivery
